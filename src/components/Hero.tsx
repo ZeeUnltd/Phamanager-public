@@ -99,7 +99,7 @@ const Hero = () => {
           <img src={heroImage} alt="hero" className="" />
         </div>
       </section>
-      <aside className="flex items-center gap-16 pl-48 py-2 bg-[#F9FAFB]">
+      <aside className="flex items-center gap-16 pl-48 py-4 bg-[#F9FAFB]">
         <p className="shrink-0">Trusted By</p>
         <div className="w-24 h-[58px]">
           <img src={image1} alt="" className="w-full" />
