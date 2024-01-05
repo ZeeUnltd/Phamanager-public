@@ -7,8 +7,21 @@ import image5 from "../assets/images/trustedPartners/5.png";
 import { MdLocationPin } from "react-icons/md";
 import { CiSearch } from "react-icons/ci";
 import { TbCloudUpload } from "react-icons/tb";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
+
+  const searchResultsHandler = e => {
+    e.preventDefault();
+    navigate("/results?id=search");
+  };
+
+  const fileUploadHandler = e => {
+    e.preventDefault();
+    navigate("/results?id=fileUpload");
+  };
+
   return (
     <div>
       <section className="flex pl-48 py-6 ">
@@ -22,7 +35,7 @@ const Hero = () => {
           <form
             action=""
             className="w-full flex items-center relative mt-12 text-sm bg-gray-100 bg-opacity-90"
-            //   onSubmit={handleSearchSubmit}
+            onSubmit={searchResultsHandler}
           >
             <div className="w-[53%] flex items-center  pl-2 bg-gray-100 bg-opacity-90 border border-formBlue rounded-s-md">
               <CiSearch className="text-slate-500" size={25} />
@@ -62,7 +75,7 @@ const Hero = () => {
           <form
             action=""
             className="relative w-full bg-slate-100 text-slate-400 text-lg border-2 border-slate-200 border-dashed rounded-md cursor-pointer"
-            // onSubmit={handleFileUpload}
+            onSubmit={fileUploadHandler}
           >
             <label
               htmlFor="prescription"
@@ -74,7 +87,7 @@ const Hero = () => {
                 id="prescription"
                 type="file"
                 className="hidden"
-                // onChange={handleFileUpload}
+                onChange={fileUploadHandler}
               />
             </label>
           </form>
