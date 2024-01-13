@@ -5,7 +5,7 @@ import AdvisoryTable from "../components/AdvisoryTable";
 import Footer from "../components/Footer";
 
 const Advisory = () => {
-  //   const [Advisories, setAdvisories] = useState(data);
+  // const [advisories, setAdvisories] = useState(data);
 
   return (
     <>
@@ -20,7 +20,7 @@ const Advisory = () => {
               filter
             </div>
           </div>
-          <AdvisoryTable Advisories={data} />
+          <AdvisoryTable advisories={data} />
         </div>
       </section>
       <Footer />

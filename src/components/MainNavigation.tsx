@@ -62,8 +62,8 @@ const MainNavigation = () => {
           </div>
           <div className="flex items-center gap-8 shrink-0 font-normal text-text">
             {navLinks.map(link => (
-              <span className="relative">
-                <NavLink key={link.id} to={link.to} className="nav">
+              <span key={link.id} className="relative">
+                <NavLink to={link.to} className="nav">
                   {link.title}
                 </NavLink>
               </span>

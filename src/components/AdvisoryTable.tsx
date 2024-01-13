@@ -9,39 +9,38 @@ type Advisory = {
 };
 
 type AdvisoryTableProps = {
-  Advisories: Advisory[];
+  advisories: Advisory[];
 };
 
-function AdvisoryTable({ Advisories }: AdvisoryTableProps) {
+function AdvisoryTable({ advisories }: AdvisoryTableProps) {
   return (
-    <table className="w-full">
-      <thead>
-        <tr>
-          <th className="">
-            <div className="flex items-center">
-              <input
-                type="checkbox"
-                className="cursor-pointer [&:not(input:checked)]:appearance-none outline-none accent-#009fe3 h-5 w-5 border border-[#009fe3] rounded-md mr-2"
-              />
+    <div className="w-full my-8">
+      <div className="flex items-center justify-between font-bold text-black text-base px-2 py-6">
+        <div className="w-[18%]">
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              className="cursor-pointer [&:not(input:checked)]:appearance-none outline-none accent-#009fe3 h-5 w-5 border border-[#009fe3] rounded-md"
+            />
 
-              <label htmlFor="orderID" className="text-base">
-                Ticket ID
-              </label>
-            </div>
-          </th>
-          <th className="text-base">Date</th>
-          <th className="text-base">Pharmacy Name</th>
-          <th className="text-base">Last update </th>
-          <th className="text-base">Status</th>
-          <th className="w-[200px]"></th>
-        </tr>
-      </thead>
-      <tbody className="">
-        {Advisories.map((advisory: Advisory, index: number) => (
+            <label htmlFor="orderID" className="text-base">
+              Ticket ID
+            </label>
+          </div>
+        </div>
+        <div className="w-[21%]">Date</div>
+        <div className="w-[21%]">Pharmacy Name</div>
+        <div className="w-[15%]">Last update </div>
+        <div className="w-[15%]">Status</div>
+        <div className="w-[10%]"></div>
+      </div>
+
+      <div className="">
+        {advisories.map((advisory: Advisory, index: number) => (
           <AdvisoryTableRow key={advisory.id + index} advisory={advisory} />
         ))}
-      </tbody>
-    </table>
+      </div>
+    </div>
   );
 }
 

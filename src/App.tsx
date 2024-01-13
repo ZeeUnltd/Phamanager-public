@@ -3,6 +3,9 @@ import Homepage from "./pages/Homepage";
 import RootLayout from "./pages/RootLayout";
 import Result from "./pages/Result";
 import Advisory from "./pages/Advisory";
+import Payments from "./pages/Payments";
+import Prescriptions from "./pages/Prescriptions";
+import Applications from "./pages/Applications";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +15,9 @@ const router = createBrowserRouter([
       { index: true, element: <Homepage /> },
       { path: "results", element: <Result /> },
       { path: "advisory", element: <Advisory /> },
+      { path: "payments", element: <Payments /> },
+      { path: "prescriptions", element: <Prescriptions /> },
+      { path: "applications", element: <Applications /> },
     ],
   },
 ]);
