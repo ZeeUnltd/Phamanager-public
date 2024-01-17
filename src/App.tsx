@@ -6,6 +6,8 @@ import Advisory from "./pages/Advisory";
 import Payments from "./pages/Payments";
 import Prescriptions from "./pages/Prescriptions";
 import Applications from "./pages/Applications";
+import SignUp from "./pages/SignUp";
+import Login from "./pages/Login";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,8 @@ const router = createBrowserRouter([
       { path: "applications", element: <Applications /> },
     ],
   },
+  { path: "signup", element: <SignUp /> },
+  { path: "login", element: <Login /> },
 ]);
 
 const App = () => <RouterProvider router={router} />;

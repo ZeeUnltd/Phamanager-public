@@ -8,7 +8,6 @@ export const navLinks = [
 ];
 
 export const tools = [
-  { id: "cart", title: "Cart", to: "cart" },
   { id: "applications", title: "Applications", to: "applications" },
   { id: "prescriptions", title: "Prescriptions", to: "prescriptions" },
   { id: "payments", title: "Payments", to: "payments" },
