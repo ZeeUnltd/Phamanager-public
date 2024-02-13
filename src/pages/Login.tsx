@@ -55,12 +55,12 @@ function Login() {
   };
 
   return (
-    <main className="bg-[#E6F2FB] p-3  flex items-start justify-between font-Euclid text-xl   ">
-      <div className="w-[50%] ">
-        <img src={loginImage} alt="" className="h-[850px]" />
+    <main className="bg-[#E6F2FB] p-3  flex items-start justify-between font-Euclid text-xl">
+      <div className="w-[50%]">
+        <img src={loginImage} alt="" className="w-full h-full" />
       </div>
 
-      <div className="w-[50%] bg-white rounded-r-[50px] flex flex-col justify-center gap-12 p-12 items-start pl-[10%] h-[850px]">
+      <div className="w-[50%] bg-white rounded-r-[40px] flex flex-col justify-center gap-12 p-12 items-start pl-[10%] h-full">
         <h3 className="font-semibold text-3xl">Welcome Back to Pharmanager</h3>
 
         <form

@@ -1,3 +1,5 @@
+import { FormEvent } from "react";
+
 import heroImage from "../assets/images/heroImage.png";
 import image1 from "../assets/images/trustedPartners/1.png";
 import image2 from "../assets/images/trustedPartners/2.png";
@@ -12,12 +14,14 @@ import { useNavigate } from "react-router-dom";
 const Hero = () => {
   const navigate = useNavigate();
 
-  const searchResultsHandler = e => {
+  const searchResultsHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     navigate("/results?id=search");
   };
 
-  const fileUploadHandler = e => {
+  const fileUploadHandler = (
+    e: React.ChangeEvent<HTMLInputElement> & FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
     navigate("/results?id=fileUpload");
   };

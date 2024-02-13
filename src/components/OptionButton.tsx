@@ -15,12 +15,12 @@ type OptionButtonProps = {
 };
 
 const OptionButton = ({ options }: OptionButtonProps) => {
-  const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(function () {
     function callback(e: KeyboardEvent) {
       if (e.code === "Escape") {
-        setOpen(false);
+        setOpenModal(false);
       }
     }
 
@@ -33,7 +33,10 @@ const OptionButton = ({ options }: OptionButtonProps) => {
   return (
     <div>
       <div className="relative ">
-        <button className="focus:outline-none" onClick={() => setOpen(!open)}>
+        <button
+          className="focus:outline-none"
+          onClick={() => setOpenModal(!openModal)}
+        >
           <SlOptionsVertical />
         </button>
 
@@ -42,7 +45,7 @@ const OptionButton = ({ options }: OptionButtonProps) => {
           className="absolute w-max -top-[10px] -left-20 rounded-md py-3 shadow-md z-10 text-sm bg-white "
           onClick={e => {
             e.preventDefault();
-            setOpen(!open);
+            setOpenModal(!openModal);
           }}
         >
           <ul>
@@ -52,7 +55,7 @@ const OptionButton = ({ options }: OptionButtonProps) => {
                   <li
                     key={option.title + index * 2}
                     className={`flex items-center gap-3 py-1 px-3 cursor-pointer hover:bg-gray-200  ${
-                      open ? "block" : "hidden"
+                      openModal ? "block" : "hidden"
                     }`}
                   >
                     <span className="w-[30px] h-[30px] flex justify-center items-center">
@@ -69,8 +72,9 @@ const OptionButton = ({ options }: OptionButtonProps) => {
                 <li
                   key={option.title + index}
                   className={`flex items-center gap-3 py-1 px-3 cursor-pointer hover:bg-gray-200  ${
-                    open ? "block" : "hidden"
+                    openModal ? "block" : "hidden"
                   }`}
+                  onClick={option.onClick}
                 >
                   <span className="w-[30px] h-[30px]  flex justify-center items-center">
                     <img

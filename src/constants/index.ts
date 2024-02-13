@@ -13,3 +13,24 @@ export const tools = [
   { id: "payments", title: "Payments", to: "payments" },
   { id: "advisory", title: "Advisory", to: "advisory" },
 ];
+
+export const drugCategories = [
+  { id: 0, title: "All" },
+  { id: 1, title: "Oral drugs and supplements" },
+  { id: 2, title: "Intravenous injections and infusions " },
+  { id: 3, title: "First aid and treatments" },
+  { id: 4, title: "Baby and toddler supplies" },
+  { id: 5, title: "Beauty products" },
+  { id: 6, title: "Women health and sanitary products" },
+  { id: 7, title: "Vaccines and cures" },
+];
+
+export const drugUnits = [
+  { id: 0, title: "mg" },
+  { id: 1, title: "ml" },
+  { id: 2, title: "kg" },
+  { id: 3, title: "litre" },
+  { id: 4, title: "sachet" },
+  { id: 5, title: "carton" },
+  { id: 6, title: "teaspoon" },
+];

@@ -62,7 +62,7 @@ function SignUp() {
   };
 
   return (
-    <main className="bg-[#E6F2FB] p-3  flex items-start justify-between font-Euclid text-xl ">
+    <main className="bg-[#E6F2FB] p-3 flex items-start justify-between font-Euclid text-xl ">
       <div className="w-[50%] ">
         <img src={signupImage} alt="" className="h-[900px]" />
       </div>
@@ -147,7 +147,7 @@ function SignUp() {
             <select
               name="type of drug buyer"
               id="buyer"
-              className="border-2 rounded-md p-2 w-full appearance-none"
+              className="border-2 rounded-md p-3 w-full"
               value={typeofBuyer}
               onChange={e => setTypeofBuyer(e.target.value)}
             >
@@ -164,7 +164,7 @@ function SignUp() {
             <select
               name="type of drug pharmacy"
               id="pharmacy"
-              className="border-2 focus:outline-none rounded-md p-2 w-full appearance-none"
+              className="border-2 focus:outline-none rounded-md p-3 w-full"
               value={typeofPharmacy}
               onChange={e => setTypeofPharmacy(e.target.value)}
             >
