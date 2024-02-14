@@ -2,15 +2,46 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import { drugCategories, drugUnits } from "../../constants";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import { useState } from "react";
+import { useContext } from "react";
+import { InventoryContext } from "../../store/inventoryContext";
 
 type props = {
   setPage: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const AddInventoryModal = (props: props) => {
+  const defaultProductData = {
+    id: "",
+    name: "",
+    category: "",
+    brand: "",
+    quantity: 0,
+    unit: "",
+    price: 0,
+    minStatus: false,
+    minAmount: 10,
+    status: "",
+  };
+
   const [showInnerModal, setShowInnerModal] = useState(false);
   const [inventoryCreated, setInventoryCreated] = useState(false);
-  const [minimumAlert, setMinimumAlert] = useState(false);
+
+  const context = useContext(InventoryContext) ?? {
+    productData: defaultProductData,
+    setProductData: () => {},
+    addToInventory: () => {},
+  };
+
+  const { productData, setProductData, addToInventory } = context;
+
+  const handleMinStatusToggle = () => {
+    setProductData({ ...productData, minStatus: !productData.minStatus });
+  };
+
+  const createInventoryHandler = () => {
+    addToInventory();
+    setInventoryCreated(true);
+  };
 
   return (
     <div className="mt-14">
@@ -31,6 +62,10 @@ const AddInventoryModal = (props: props) => {
             Item name
           </label>
           <input
+            value={productData ? productData["name"] : ""}
+            onChange={e =>
+              setProductData({ ...productData, name: e.target.value })
+            }
             type="text"
             id="name"
             placeholder="item name"
@@ -45,6 +80,10 @@ const AddInventoryModal = (props: props) => {
             Category
           </label>
           <select
+            value={productData ? productData["category"] : ""}
+            onChange={e =>
+              setProductData({ ...productData, category: e.target.value })
+            }
             name="category"
             id="category"
             className="p-2 border-none outline-none bg-[#F5F5F5] rounded-md w-[40%] text-[16px]"
@@ -67,6 +106,10 @@ const AddInventoryModal = (props: props) => {
             Brand
           </label>
           <input
+            value={productData ? productData["brand"] : ""}
+            onChange={e =>
+              setProductData({ ...productData, brand: e.target.value })
+            }
             type="text"
             id="brand"
             placeholder="Brand"
@@ -78,16 +121,27 @@ const AddInventoryModal = (props: props) => {
             htmlFor="dosage"
             className="text-[16px] text-[#110C4A] font-medium self-center w-[20%] shrink-0"
           >
-            Dosage strength
+            Quantity
           </label>
 
           <input
-            type="text"
-            id="dosage"
+            value={productData ? productData["quantity"] : ""}
+            onChange={e =>
+              setProductData({
+                ...productData,
+                quantity: +e.target.value,
+              })
+            }
+            type="number"
+            id="quantity"
             placeholder="Input number"
             className="px-2 py-1 text-[16px] w-[40%] border-none outline-none bg-[#F5F5F5] rounded-md placeholder:text-[12px] placeholder:text-[#B1B1B4] placeholder:font-medium shrink-0"
           />
           <select
+            value={productData ? productData["unit"] : ""}
+            onChange={e =>
+              setProductData({ ...productData, unit: e.target.value })
+            }
             name="unit"
             id="unit"
             className="p-2 border-none outline-none bg-[#F5F5F5] rounded-md w-[40%] text-[16px]"
@@ -110,7 +164,11 @@ const AddInventoryModal = (props: props) => {
             Price
           </label>
           <input
-            type="text"
+            value={productData ? productData["price"] : ""}
+            onChange={e =>
+              setProductData({ ...productData, price: +e.target.value })
+            }
+            type="number"
             id="price"
             placeholder="Enter price"
             className="px-2 py-1 text-[16px] w-[40%] border-none outline-none bg-[#F5F5F5] rounded-md placeholder:text-[12px] placeholder:text-[#B1B1B4] placeholder:font-medium shrink-0"
@@ -122,7 +180,7 @@ const AddInventoryModal = (props: props) => {
               type="checkbox"
               id="checkbox"
               className="w-[20px] h-[20px]"
-              onClick={() => setMinimumAlert(prevState => !prevState)}
+              onClick={handleMinStatusToggle}
             />
           </div>
           <label
@@ -132,7 +190,7 @@ const AddInventoryModal = (props: props) => {
             Set minimum inventory alert notification
           </label>
         </div>
-        {minimumAlert && (
+        {productData.minStatus && (
           <div className="mt-6 flex justify-start gap-6">
             <label
               htmlFor="quantity"
@@ -141,8 +199,12 @@ const AddInventoryModal = (props: props) => {
               Quantity
             </label>
             <input
-              type="text"
-              id="quantity"
+              value={productData ? productData["minAmount"] : ""}
+              onChange={e =>
+                setProductData({ ...productData, minAmount: +e.target.value })
+              }
+              type="number"
+              id="minQuantity"
               placeholder="input number"
               className="px-2 py-1 text-[16px] w-[40%] border-none outline-none bg-[#F5F5F5] rounded-md placeholder:text-[12px] placeholder:text-[#B1B1B4] placeholder:font-medium shrink-0"
             />
@@ -180,7 +242,7 @@ const AddInventoryModal = (props: props) => {
               </button>
               <button
                 className="rounded-3xl bg-[#F04438] text-[12px] py-3 px-4"
-                onClick={() => setInventoryCreated(true)}
+                onClick={createInventoryHandler}
               >
                 Create inventory
               </button>

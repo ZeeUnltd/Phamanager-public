@@ -16,13 +16,13 @@ export const tools = [
 
 export const drugCategories = [
   { id: 0, title: "All" },
+  { id: 7, title: "Vaccines and cures" },
   { id: 1, title: "Oral drugs and supplements" },
   { id: 2, title: "Intravenous injections and infusions " },
   { id: 3, title: "First aid and treatments" },
   { id: 4, title: "Baby and toddler supplies" },
   { id: 5, title: "Beauty products" },
   { id: 6, title: "Women health and sanitary products" },
-  { id: 7, title: "Vaccines and cures" },
 ];
 
 export const drugUnits = [

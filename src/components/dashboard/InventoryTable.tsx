@@ -1,18 +1,27 @@
+import { useContext } from "react";
+import { InventoryContext } from "../../store/inventoryContext";
 import InventoryTableRow from "./InventoryTableRow";
 
 type Inventory = {
   id: string;
-  brand: string;
   name: string;
-  items: number;
+  category: string;
+  brand: string;
+  quantity: number;
+  unit: string;
+  price: number;
+  minStatus: boolean;
+  minAmount: number;
   status: string;
 };
 
-type InventoryTableProps = {
-  inventory: Inventory[];
-};
+const InventoryTable = () => {
+  const context = useContext(InventoryContext) ?? {
+    renderedData: [],
+  };
 
-const InventoryTable = ({ inventory }: InventoryTableProps) => {
+  const { renderedData } = context;
+
   return (
     <div className="w-full my-8">
       <div className="flex items-center justify-between font-semibold text-black text-base px-2 py-6">
@@ -35,7 +44,7 @@ const InventoryTable = ({ inventory }: InventoryTableProps) => {
         <div className="w-[9%]"></div>
       </div>
       <div className="">
-        {inventory.map((inventory: Inventory, index: number) => (
+        {renderedData.map((inventory: Inventory, index: number) => (
           <InventoryTableRow key={inventory.id + index} inventory={inventory} />
         ))}
       </div>

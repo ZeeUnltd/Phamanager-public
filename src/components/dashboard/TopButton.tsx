@@ -28,8 +28,9 @@ const TopButton = (props: props) => {
       </button>
       {dropdown && (
         <span className="absolute right-0 border border-slate-300 mt-1 bg-white z-10">
-          {props.options.map(option => (
+          {props.options.map((option: item, i: number) => (
             <button
+              key={i}
               onClick={() => props.setPage(option.link)}
               className="flex items-center justify-center gap-3 p-2 font-medium cursor-pointer text-text hover:opacity-90"
             >

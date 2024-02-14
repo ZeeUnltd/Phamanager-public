@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { SlOptionsVertical } from "react-icons/sl";
 import { Link } from "react-router-dom";
-// import imager from "../assets/images/trustedPartners/2.png";
+import { useContext } from "react";
+import { InventoryContext } from "../store/inventoryContext";
 
 type Options = {
   title: string;
@@ -9,13 +10,32 @@ type Options = {
   onClick?: () => void;
   to?: string | undefined;
 };
+type Inventory = {
+  id: string;
+  name: string;
+  category: string;
+  brand: string;
+  quantity: number;
+  unit: string;
+  price: number;
+  minStatus: boolean;
+  minAmount: number;
+  status: string;
+};
 
 type OptionButtonProps = {
   options: Options[];
+  inventory: Inventory;
 };
 
-const OptionButton = ({ options }: OptionButtonProps) => {
+const OptionButton = ({ options, inventory }: OptionButtonProps) => {
   const [openModal, setOpenModal] = useState(false);
+
+  const context = useContext(InventoryContext) ?? {
+    deleteInventoryProduct: () => {},
+  };
+
+  const { deleteInventoryProduct } = context;
 
   useEffect(function () {
     function callback(e: KeyboardEvent) {
@@ -74,7 +94,7 @@ const OptionButton = ({ options }: OptionButtonProps) => {
                   className={`flex items-center gap-3 py-1 px-3 cursor-pointer hover:bg-gray-200  ${
                     openModal ? "block" : "hidden"
                   }`}
-                  onClick={option.onClick}
+                  onClick={() => deleteInventoryProduct(inventory)}
                 >
                   <span className="w-[30px] h-[30px]  flex justify-center items-center">
                     <img

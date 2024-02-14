@@ -1,12 +1,16 @@
 import OptionButton from "../OptionButton";
-import Inventory from "./Inventory";
 import { options } from "../../constants/inventory/index";
 
 type Inventory = {
   id: string;
-  brand: string;
   name: string;
-  items: number;
+  category: string;
+  brand: string;
+  quantity: number;
+  unit: string;
+  price: number;
+  minStatus: boolean;
+  minAmount: number;
   status: string;
 };
 
@@ -32,7 +36,7 @@ const InventoryTableRow = ({ inventory }: InventoryTableProps) => {
       </div>
       <div className="w-[20%]">{inventory.name}</div>
       <div className="w-[20%]">{inventory.brand}</div>
-      <div className="w-[18%]">{inventory.items}</div>
+      <div className="w-[18%]">{inventory.quantity}</div>
       <div className="w-[15%]">
         <p
           className={`p-2 border-2 rounded-xl text-center text-base ${
@@ -47,7 +51,7 @@ const InventoryTableRow = ({ inventory }: InventoryTableProps) => {
         </p>
       </div>
       <div className="flex justify-center items-center w-[9%]">
-        <OptionButton options={options} />
+        <OptionButton inventory={inventory} options={options} />
       </div>
     </div>
   );

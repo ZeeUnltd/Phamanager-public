@@ -1,19 +1,34 @@
 import { BsFilter } from "react-icons/bs";
 import { useState } from "react";
-import { data } from "../../constants/inventory";
 import InventoryTable from "./InventoryTable";
+import { useContext } from "react";
+import { InventoryContext } from "../../store/inventoryContext";
+import FilterData from "./FilterData";
 
 const Inventory = () => {
-  const [inventory, setInventory] = useState(data);
   const [category, setCategory] = useState("all");
+  const [filterModal, setFilterModal] = useState(false);
+
+  const context = useContext(InventoryContext) ?? {
+    setRenderedData: () => {},
+    inventoryProducts: [],
+  };
+
+  const { setRenderedData, inventoryProducts } = context;
 
   const filterData = (category: string) => {
-    const filteredData = data.filter(
-      inventory => inventory.status.toLowerCase() === category
-    );
-    setCategory(category);
-    setInventory(filteredData);
+    if (category != "all") {
+      const filteredData = inventoryProducts.filter(
+        inventory => inventory.status.toLowerCase() === category
+      );
+      setCategory(category);
+      setRenderedData(filteredData);
+    } else {
+      setCategory("all");
+      setRenderedData(inventoryProducts);
+    }
   };
+
   return (
     <section className="py-6">
       <h3 className="font-bold text-2xl text-text opacity-60">All Inventory</h3>
@@ -22,8 +37,7 @@ const Inventory = () => {
           <div className="flex justify-between items-center p-2 bg-[#DCEDF5] text-white rounded-full w-[30%]">
             <span
               onClick={() => {
-                setInventory(data);
-                setCategory("all");
+                filterData("all");
               }}
               className={`p-3 text-base text-center rounded-full w-1/2 cursor-pointer  ${
                 category === "all" && `bg-[#009FE3]`
@@ -42,14 +56,20 @@ const Inventory = () => {
               Limit Alerts
             </span>
           </div>
-          <div className="w-[100px] border border-formBlue rounded-full flex text-formBlue justify-around items-center p-2 mr-6 cursor-pointer text-base">
-            <span>
-              <BsFilter />
-            </span>
-            filter
+          <div className="relative w-[100px] border border-formBlue rounded-full text-formBlue p-2 mr-6 text-base">
+            <div
+              className="flex justify-around items-center cursor-pointer"
+              onClick={() => setFilterModal(filterModal => !filterModal)}
+            >
+              <span>
+                <BsFilter />
+              </span>
+              filter
+            </div>
+            {filterModal && <FilterData />}
           </div>
         </div>
-        <InventoryTable inventory={inventory} />
+        <InventoryTable />
       </div>
     </section>
   );
