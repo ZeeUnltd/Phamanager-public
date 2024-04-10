@@ -9,16 +9,23 @@ import { useState } from "react";
 import InventoryItem from "../components/dashboard/InventoryItem";
 import AddInventoryModal from "../components/dashboard/AddInventoryModal";
 import Inventory from "../components/dashboard/Inventory";
+import { useAppDispatch, useAppSelector } from "../components/redux/store";
+import AddInventory from "../components/modals/addInventory";
+import { showItem } from "../components/redux/utils";
 
 const ManageInventory = () => {
   const [page, setPage] = useState("home");
   const isEmpty = false;
+  const show = useAppSelector(state=>state.utils.show)
+  const Dispatch = useAppDispatch()
+
   const topBtnOptions = [
     {
       id: 0,
       title: "Add new inventory",
-      link: "modal",
       icon: <FaCirclePlus />,
+      action:()=>Dispatch(showItem('add-inventory'))
+    
     },
     {
       id: 1,
@@ -89,8 +96,10 @@ const ManageInventory = () => {
           </section>
         </>
       )}
-      {page === "modal" && <AddInventoryModal setPage={setPage} />}
+      {/* {page === "modal" && <AddInventoryModal setPage={setPage} />} */}
+      {show === 'add-inventory' && <AddInventory/>}
       {page === "inventory" && <Inventory />}
+
     </div>
   );
 };

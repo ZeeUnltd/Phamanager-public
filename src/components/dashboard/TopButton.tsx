@@ -4,8 +4,9 @@ import { useState } from "react";
 type item = {
   id: number;
   title: string;
-  link: string;
-  icon: React.ReactNode;
+  link?: string;
+  icon?: React.ReactNode;
+  action?:()=>void
 };
 
 type props = {
@@ -31,7 +32,7 @@ const TopButton = (props: props) => {
           {props.options.map((option: item, i: number) => (
             <button
               key={i}
-              onClick={() => props.setPage(option.link)}
+              onClick={option.action }
               className="flex items-center justify-center gap-3 p-2 font-medium cursor-pointer text-text hover:opacity-90"
             >
               {option.icon}

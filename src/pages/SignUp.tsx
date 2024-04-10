@@ -1,79 +1,159 @@
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import signupImage from "../assets/images/signupimage.jpg";
 import ContinueWith from "../components/ContinueWith";
-import PasswordInput from "../components/PasswordInput";
+
+import { Form, Formik } from "formik";
+import CustomInput from "../components/Forms/customInput";
+import CustomSelect from "../components/Forms/customSelect.js";
+import { Button } from "../components/elements/button.js";
+import axios from "axios";
+import * as Yup from 'yup'
+import { useAppDispatch, useAppSelector } from "../components/redux/store.js";
+import { patient_Registration, pharmacy_Registration } from "../components/redux/Auth/features.js";
 
 function SignUp() {
   const [signupAs, setSignupAs] = useState("drug buyer");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [typeofBuyer, setTypeofBuyer] = useState("");
-  const [typeofPharmacy, setTypeofPharmacy] = useState("");
-  const [businessName, setBusinessName] = useState("");
+  const [showPassword, setShowPassword] = useState(true)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const buyer = signupAs === "drug buyer";
+  const pharmacy = signupAs === "pharmacy";
+
+  const dispatch =useAppDispatch()
+  const getToken = useAppSelector(state=>state.auth.userAccessToken)
+  const token:string|any = getToken
+
+
+  function setHttpOnlyCookie(name:string, value:string, days:number) {
+    const expires = days ? `; expires=${new Date(Date.now() + days * 24 * 60 * 60 * 1000).toUTCString()}` : '';
+    document.cookie = `${name}=${value || ''}${expires}; path=/; Secure; HttpOnly`;
+  }
+
   const navigate = useNavigate();
+  console.log(token);
+  
 
-  const newUser = {
-    email: email,
-    firstName: buyer ? firstName : null,
-    lastName: buyer ? lastName : null,
-    businessName: !buyer ? businessName : null,
-    password: password,
-    type: buyer ? typeofBuyer : typeofPharmacy,
-    address: !buyer ? "Lagos" : null,
-  };
+  localStorage.setItem("token", token)
+  
+  const initialValues = buyer?{
+    firstName: '',
+    lastName: '',
+    email: '',
+    type: '',
+    password: '',
+  }:pharmacy?{
+    businessName: '',
+    email: '',
+    type: '',
+    password: '',
+  }:null;
+  
 
-  const signupHandler = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(newUser);
 
-    async function action() {
-      const response = await fetch(
-        `https://pharmanager-backend.onrender.com/auth/${
-          buyer ? "" : "pharmacy/"
-        }signup`,
-        {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify(newUser),
-        }
-      );
 
-      if (response.ok) {
-        const resData = await response.json();
-        console.log(resData);
-        return navigate("/login");
-        // console.log(`${response.status}: ${JSON.stringify(resData)}`);
-      } else if (response.status === 409) {
-        console.log(`${response.status}: ${await response.text()}`);
-        // Handle conflict error, inform the user, etc.
-      } else {
-        console.log(`${response.status}: ${await response.text()}`);
-        // Handle other errors
-      }
+  const validationSchema = buyer
+  ? Yup.object().shape({
+      firstName: Yup.string()
+        .min(2, 'First name must be at least 2 characters')
+        .max(50, 'First name must be at most 50 characters')
+        .required('First name is required'),
+      lastName: Yup.string()
+        .min(2, 'Last name must be at least 2 characters')
+        .max(50, 'Last name must be at most 50 characters')
+        .required('Last name is required'),
+      email: Yup.string()
+        .email('Invalid email address')
+        .required('Email is required'),
+      password: Yup.string().required('Password is Required'),
+      type: Yup.string().required('Type is required'),
+    })
+  : pharmacy
+  ? Yup.object().shape({
+      businessName: Yup.string()
+        .min(2, 'Business name must be at least 2 characters')
+        .max(50, 'Business name must be at most 50 characters')
+        .required('Business name is required'),
+      email: Yup.string()
+        .email('Invalid email address')
+        .required('Email is required'),
+      password: Yup.string().required('Password is Required'),
+      type: Yup.string().required('Type is required'),
+    })
+  : null;
+
+
+const onSubmit =async(data:any)=>{
+  console.log(data);
+  if(buyer){
+    setIsSubmitting(true)
+
+    let  submit = await dispatch(patient_Registration(data))
+    if (submit) {
+      console.log('submitted');
+      
     }
-    action();
-  };
+  }else if(pharmacy){
+  setIsSubmitting(true)
+
+  let submit = await dispatch(pharmacy_Registration(data))
+  if (submit) {
+    console.log('submitted');
+    
+  }
+  }
+
+  setIsSubmitting(false)
+}
+
+  // const signupHandler = (e: FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   console.log(newUser);
+
+  //   async function action() {
+  //     const response = await fetch(
+  //       `https://pharmanager-backend.onrender.com/auth/${
+  //         buyer ? "" : "pharmacy/"
+  //       }signup`,
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-type": "application/json",
+  //         },
+  //         body: JSON.stringify(newUser),
+  //       }
+  //     );
+
+  //     if (response.ok) {
+  //       const resData = await response.json();
+  //       console.log(resData);
+  //       return navigate("/login");
+  //       // console.log(`${response.status}: ${JSON.stringify(resData)}`);
+  //     } else if (response.status === 409) {
+  //       console.log(`${response.status}: ${await response.text()}`);
+  //       // Handle conflict error, inform the user, etc.
+  //     } else {
+  //       console.log(`${response.status}: ${await response.text()}`);
+  //       // Handle other errors
+  //     }
+  //   }
+  //   action();
+  // };
+
+  
 
   return (
     <main className="bg-[#E6F2FB] p-3 flex items-start justify-between font-Euclid text-xl ">
       <div className="w-[50%] ">
         <img src={signupImage} alt="" className="h-[900px]" />
       </div>
-
       <div className="w-[50%] bg-white rounded-r-[50px] flex flex-col gap-10 p-12 items-start pl-[10%] h-[900px]">
         <h3 className="font-semibold text-2xl">Welcome to Pharmanager</h3>
 
         <div className="flex justify-between border-2 border-formBlue rounded-md w-[550px]">
           <div
             className={`p-3 w-[50%] text-center cursor-pointer ${
-              signupAs === "drug buyer" && "bg-formBlue text-white"
+              buyer && "bg-formBlue text-white"
             }`}
             onClick={() => setSignupAs("drug buyer")}
           >
@@ -81,7 +161,7 @@ function SignUp() {
           </div>
           <div
             className={`p-3 w-[50%] text-center cursor-pointer ${
-              signupAs === "pharmacy" && "bg-formBlue text-white"
+              pharmacy && "bg-formBlue text-white"
             }`}
             onClick={() => setSignupAs("pharmacy")}
           >
@@ -89,101 +169,77 @@ function SignUp() {
           </div>
         </div>
 
-        <form
-          method="post"
-          onSubmit={signupHandler}
-          className="w-[550px] flex flex-col gap-8"
-        >
-          {buyer && (
-            <div className="flex justify-between items-center gap-6 ">
-              <input
-                required
-                type="text"
-                placeholder="First Name"
-                name="firstName"
-                value={firstName}
-                onChange={e => setFirstName(e.target.value)}
-                className="border-2 border-slate-200 focus:outline-formBlue rounded-md p-4 w-[50%]"
-              />
-              <input
-                type="text"
-                placeholder="Last Name"
-                name="lastName"
-                value={lastName}
-                onChange={e => setLastName(e.target.value)}
-                className="border-2 border-slate-200 focus:outline-formBlue rounded-md p-4 w-[50%]"
-              />
-            </div>
-          )}
-          {!buyer && (
-            <input
-              type="text"
-              placeholder="Business Name"
-              name="businessName"
-              value={businessName}
-              onChange={e => setBusinessName(e.target.value)}
-              className="border-2 border-slate-200 focus:outline-formBlue rounded-md p-4 w-[100%]"
-            />
-          )}
-          <input
-            required
+      <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+      <Form
+          className="w-[550px] flex flex-col gap-8" >
+          {
+            buyer? (
+              <>
+              <div className="flex justify-between items-center gap-6 ">
+                <CustomInput
+                  type="text"
+                  placeholder="First Name"
+                  name="firstName"
+                  label=""
+  
+                />
+              
+                <CustomInput
+                  type="text"
+                  placeholder="Last Name"
+                  name="lastName"
+                  label=""
+                />
+              </div>
+              <CustomInput
+            label=""
             type="email"
             placeholder="Email Address"
             name="email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            className="border-2 border-slate-200 focus:outline-formBlue rounded-md p-4 w-full"
           />
-          <PasswordInput
+          <CustomInput
             placeholder="Password"
             name="password"
-            required
-            value={password}
-            onChange={e => setPassword(e.target.value)}
+            label=""
+            type={showPassword ? 'text' : 'password'}
+       handleShowPassword={()=>setShowPassword(!showPassword)}
           />
 
           {/* For Drug Buyer Categories */}
-          {buyer && (
-            <select
-              name="type of drug buyer"
-              id="buyer"
-              className="border-2 rounded-md p-3 w-full"
-              value={typeofBuyer}
-              onChange={e => setTypeofBuyer(e.target.value)}
-            >
-              <option value="type">Type of Drug Buyer</option>
-              <option value="Corporate Organization">
-                CORPORATE ORGANIZATION
-              </option>
-              <option value="PATIENT">PATIENT</option>
-            </select>
-          )}
+          <CustomSelect label=""  name="type" options={[{label:'CORPORATE ORGANIZATION', value:'Corporate Organization'},{value:'PATIENT',label:'PATIENT'}]}/>
+              </>
+              
+            ):pharmacy? (
+              <>
+              
+              <CustomInput
+                type="text"
+                placeholder="Business Name"
+                name="businessName"
+                label=""
+              />
+                        <CustomInput
+            label=""
+            type="email"
+            placeholder="Email Address"
+            name="email"
+          />
+          <CustomInput
+            placeholder="Password"
+            name="password"
+            label=""
+            type={showPassword ? 'text' : 'password'}
+       handleShowPassword={()=>setShowPassword(!showPassword)}
+          />
+          <CustomSelect label=""  name="type" options={[{label:'COMMUNITY PHARMACY', value:'COMMUNITY_PHARMACY'},{value:'HOSPITAL/CLINIC PHARMACY',label:'HOSPITAL/CLINIC PHARMACY'}]}/>
 
-          {/* For Pharmacy Categories */}
-          {!buyer && (
-            <select
-              name="type of drug pharmacy"
-              id="pharmacy"
-              className="border-2 focus:outline-none rounded-md p-3 w-full"
-              value={typeofPharmacy}
-              onChange={e => setTypeofPharmacy(e.target.value)}
-            >
-              <option value="type">Type of Pharmacy</option>
-              <option value="COMMUNITY_PHARMACY">COMMUNITY_PHARMACY</option>
-              <option value="HOSPITAL/CLINIC PHARMACY">
-                HOSPITAL/CLINIC PHARMACY
-              </option>
-              <option value="DISTRIBUTOR">DISTRIBUTOR</option>
-            </select>
-          )}
+              </>
+            ):null
+          }
 
-          <button
-            type="submit"
-            className="w-full bg-formBlue rounded-md text-center p-4 text-white"
-          >
-            Create an Account
-          </button>
-        </form>
+          <Button isLoading={isSubmitting} size="lg" type="submit"> Create an Account</Button>
+        </Form>
+      </Formik>
 
         <ContinueWith />
 

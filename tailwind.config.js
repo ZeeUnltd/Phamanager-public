@@ -9,6 +9,7 @@ export default {
         formBlue: "#009FE3",
         white: "#ffffff",
         // text: "#22252C",
+        theme:'#009FE3',
         text: "#424750",
       },
       fontFamily: {
