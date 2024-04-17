@@ -16,10 +16,12 @@ interface InputProps {
     max?: number,
     min?: number,
     value?: string,
-    id?:string
+    id?:string,
+    gap?:number|number,
+    height?:number|string
 }
 
-const CustomModalInput: FC<InputProps> = ({ label, handleOnChange, handleOnBlur, placeholder, name, type = "text", isRequired, formik, handleShowPassword, max, min, value, id , ...props }) => {
+const CustomModalInput: FC<InputProps> = ({ label, handleOnChange, handleOnBlur, placeholder, name, type = "text", isRequired, formik, handleShowPassword, max, min, value, id ,gap,height, ...props }) => {
 
     const { setFieldValue } = useFormikContext();
 
@@ -52,7 +54,7 @@ const CustomModalInput: FC<InputProps> = ({ label, handleOnChange, handleOnBlur,
             return (
                 <div className="space-y-1">
                     {
-                        label && (    <label htmlFor={name}>{isRequired && <span className="text-red-600">*</span>}{label}</label>)
+                        label && (    <label  htmlFor={name}>{isRequired && <span className="text-red-600">*</span>}{label}</label>)
                     }
                     <div>
                         <input
@@ -71,14 +73,14 @@ const CustomModalInput: FC<InputProps> = ({ label, handleOnChange, handleOnBlur,
         default:
             return (
                 <div className={`form-field ${formik?.touched[name] && formik?.errors[name] ? 'error' : ''} space-y-1 flex items-center justify-between gap-8`}>
-                    <label className='text-lg font-semibold text-[#110C4A]' htmlFor={name}>{isRequired && <span className="text-red-600">*</span>}{label}</label>
+                    <label className={`text-lg font-semibold text-[#110C4A] mr-${gap}`} htmlFor={name}>{isRequired && <span className="text-red-600">*</span>}{label}</label>
                     <div className='flex items-center  relative ' >
 
                         <Field name={name} id={id} maxLength={max} {...props}>
                             {({ field }: any) => (
                                 <input
                                     type={type}
-                                    className='input focus:outline-formBlue rounded-md p-4 w-[17rem] text-gray-600 bg-gray-100'
+                                    className={`input focus:outline-formBlue rounded-md p-4 py-[0.7rem] w-[17rem]  text-gray-600 bg-gray-100 h-${height}`}
                                     value={field.value}
                                     placeholder={placeholder}
                                     onChange={(e) => {

@@ -1,28 +1,56 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import ContinueWith from "../components/ContinueWith";
 import loginImage from "../assets/images/loginimage.jpg";
 import CustomInput from "../components/Forms/customInput";
 import { Formik, Form } from "formik";
 import { Button } from "../components/elements/button";
 import * as Yup from 'yup'
-import { useAppDispatch } from "../components/redux/store";
+import { useAppDispatch, useAppSelector } from "../components/redux/store";
 import { login } from "../components/redux/Auth/features";
-
+import Cookies from "universal-cookie";
+import jwt, { jwtDecode } from  "jwt-decode"
+import { setUserAccessToken } from "../components/redux/Auth";
+import { decodedToken } from "../components/redux/Auth/interface";
 function Login() {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
+
+  const [callbackUrl, setCallBackUrl] = useState<string | null>(null)
+
+  const cookies = new Cookies()
+  const dispatch = useAppDispatch()
+  const user = useAppSelector(state=>state.auth.user)
+
+
+  useEffect ( ()=>{
+    if(user){
+      const decodedToken = jwtDecode<decodedToken>(user?.data.accessToken)
+      cookies.set("jwt_authorization", decodedToken)
+      
+      dispatch(setUserAccessToken(decodedToken))
+    }else{
+      const storedToken = cookies.get('accessToken')
+      if(storedToken){
+        const decodedStoredToken = jwtDecode<decodedToken>(storedToken)
+        dispatch(setUserAccessToken(decodedStoredToken))
+      }
+    }
+  },[user, dispatch])
+
+//   useEffect(() => {
+//     const queryParams = new URLSearchParams(window.location.search);
+//     if (queryParams.has('callbackUrl')) {
+//         setCallBackUrl(queryParams.get('callbackUrl'));
+//     }
+// }, []);
+
   const [showpassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const dispatch = useAppDispatch()
-  const buyer = false;
+
+  // const buyer = false;
   const navigate = useNavigate();
 
-  // const newUser = {
-  //   email: email,
-  //   password: password,
-  // };
+  
   const initialValues={
     email:'',
     password:''
@@ -80,7 +108,10 @@ function Login() {
   }
 
   return (
-    <main className="bg-[#E6F2FB] p-3  flex items-start justify-between font-Euclid text-xl">
+      <>
+   {
+    user?(<div>Hello {user.data.pharmacy.businessName}</div>):(
+      <main className="bg-[#E6F2FB] p-3  flex items-start justify-between font-Euclid text-xl">
       <div className="w-[50%]">
         <img src={loginImage} alt="" className="w-full h-full" />
       </div>
@@ -91,20 +122,7 @@ function Login() {
        <Formik initialValues={initialValues} validationSchema={validationSchema}   onSubmit={onSubmit}>
        <Form
           className="w-[550px] flex  flex-col gap-10" >
-          {/* <input
-            required
-            type="text"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            placeholder="Email address/Unique Identification Number"
-            className="border-2 focus:outline-formBlue rounded-md p-4 w-full  border-slate-200"
-          /> */}
-          {/* <PasswordInput
-            placeholder="Password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            required
-          /> */}
+     
           <CustomInput name="email" label="Email" placeholder="Email/Unique Identification Number"/>
           <CustomInput name="password" label="Password"   placeholder='password'
               type={showpassword ? 'text' : 'password'}
@@ -148,6 +166,9 @@ function Login() {
         </div>
       </div>
     </main>
+    )
+   }
+      </>
   );
 }
 

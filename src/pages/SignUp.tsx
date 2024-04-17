@@ -7,7 +7,6 @@ import { Form, Formik } from "formik";
 import CustomInput from "../components/Forms/customInput";
 import CustomSelect from "../components/Forms/customSelect.js";
 import { Button } from "../components/elements/button.js";
-import axios from "axios";
 import * as Yup from 'yup'
 import { useAppDispatch, useAppSelector } from "../components/redux/store.js";
 import { patient_Registration, pharmacy_Registration } from "../components/redux/Auth/features.js";
@@ -21,7 +20,7 @@ function SignUp() {
   const pharmacy = signupAs === "pharmacy";
 
   const dispatch =useAppDispatch()
-  const getToken = useAppSelector(state=>state.auth.userAccessToken)
+  const getToken = useAppSelector(state=>state.auth.decodedToken)
   const token:string|any = getToken
 
 
@@ -34,53 +33,56 @@ function SignUp() {
   console.log(token);
   
 
-  localStorage.setItem("token", token)
-  
-  const initialValues = buyer?{
+
+
+
+
+  const buyerInitialvalues ={
     firstName: '',
     lastName: '',
     email: '',
-    type: '',
+    role: '',
     password: '',
-  }:pharmacy?{
+  }
+
+  const pharmacyIntialValues ={
     businessName: '',
     email: '',
     type: '',
     password: '',
-  }:null;
-  
+    address:''
+  }
 
 
+const buyerValidationSchema =Yup.object().shape({
+  firstName: Yup.string()
+    .min(2, 'First name must be at least 2 characters')
+    .max(50, 'First name must be at most 50 characters')
+    .required('First name is required'),
+  lastName: Yup.string()
+    .min(2, 'Last name must be at least 2 characters')
+    .max(50, 'Last name must be at most 50 characters')
+    .required('Last name is required'),
+  email: Yup.string()
+    .email('Invalid email address')
+    .required('Email is required'),
+  password: Yup.string().required('Password is Required'),
+  role: Yup.string().required('Type is required'),
+})
 
-  const validationSchema = buyer
-  ? Yup.object().shape({
-      firstName: Yup.string()
-        .min(2, 'First name must be at least 2 characters')
-        .max(50, 'First name must be at most 50 characters')
-        .required('First name is required'),
-      lastName: Yup.string()
-        .min(2, 'Last name must be at least 2 characters')
-        .max(50, 'Last name must be at most 50 characters')
-        .required('Last name is required'),
-      email: Yup.string()
-        .email('Invalid email address')
-        .required('Email is required'),
-      password: Yup.string().required('Password is Required'),
-      type: Yup.string().required('Type is required'),
-    })
-  : pharmacy
-  ? Yup.object().shape({
-      businessName: Yup.string()
-        .min(2, 'Business name must be at least 2 characters')
-        .max(50, 'Business name must be at most 50 characters')
-        .required('Business name is required'),
-      email: Yup.string()
-        .email('Invalid email address')
-        .required('Email is required'),
-      password: Yup.string().required('Password is Required'),
-      type: Yup.string().required('Type is required'),
-    })
-  : null;
+
+const PharmacyValidationSchema = Yup.object().shape({
+  businessName: Yup.string()
+    .min(2, 'Business name must be at least 2 characters')
+    .max(50, 'Business name must be at most 50 characters')
+    .required('Business name is required'),
+  email: Yup.string()
+    .email('Invalid email address')
+    .required('Email is required'),
+  password: Yup.string().required('Password is Required'),
+  type: Yup.string().required('Type is required'),
+  address:Yup.string().required('A user must have an address')
+})
 
 
 const onSubmit =async(data:any)=>{
@@ -140,11 +142,13 @@ const onSubmit =async(data:any)=>{
   //   action();
   // };
 
+  // setHttpOnlyCookie()
   
 
   return (
     <main className="bg-[#E6F2FB] p-3 flex items-start justify-between font-Euclid text-xl ">
       <div className="w-[50%] ">
+   
         <img src={signupImage} alt="" className="h-[900px]" />
       </div>
       <div className="w-[50%] bg-white rounded-r-[50px] flex flex-col gap-10 p-12 items-start pl-[10%] h-[900px]">
@@ -169,49 +173,65 @@ const onSubmit =async(data:any)=>{
           </div>
         </div>
 
-      <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+
+    {
+      
+      buyer && (
+        <Formik initialValues={buyerInitialvalues} validationSchema={buyerValidationSchema} onSubmit={onSubmit}>
+        <Form
+        
+            className="w-[550px] flex flex-col gap-8" >
+        
+                <>
+                <div className="flex justify-between items-center gap-6 ">
+                  <CustomInput
+                    type="text"
+                    placeholder="First Name"
+                    name="firstName"
+                    label=""
+    
+                  />
+                
+                  <CustomInput
+                    type="text"
+                    placeholder="Last Name"
+                    name="lastName"
+                    label=""
+                  />
+                </div>
+                <CustomInput
+              label=""
+              type="email"
+              placeholder="Email Address"
+              name="email"
+            />
+            <CustomInput
+              placeholder="Password"
+              name="password"
+              label=""
+              type={showPassword ? 'text' : 'password'}
+         handleShowPassword={()=>setShowPassword(!showPassword)}
+            />
+  
+            {/* For Drug Buyer Categories */}
+            <CustomSelect label=""  name="role" options={[{label:'CORPORATE ORGANIZATION', value:'Corporate Organization'},{value:'patient',label:'PATIENT'}]}/>
+                </>
+                
+      
+  
+            <Button isLoading={isSubmitting} size="lg" type="submit"> Create an Account</Button>
+          </Form>
+        </Formik>
+      )
+    
+    }
+  {
+    pharmacy && (
+      <Formik initialValues={pharmacyIntialValues} validationSchema={PharmacyValidationSchema} onSubmit={onSubmit}>
       <Form
           className="w-[550px] flex flex-col gap-8" >
-          {
-            buyer? (
-              <>
-              <div className="flex justify-between items-center gap-6 ">
-                <CustomInput
-                  type="text"
-                  placeholder="First Name"
-                  name="firstName"
-                  label=""
-  
-                />
-              
-                <CustomInput
-                  type="text"
-                  placeholder="Last Name"
-                  name="lastName"
-                  label=""
-                />
-              </div>
-              <CustomInput
-            label=""
-            type="email"
-            placeholder="Email Address"
-            name="email"
-          />
-          <CustomInput
-            placeholder="Password"
-            name="password"
-            label=""
-            type={showPassword ? 'text' : 'password'}
-       handleShowPassword={()=>setShowPassword(!showPassword)}
-          />
-
-          {/* For Drug Buyer Categories */}
-          <CustomSelect label=""  name="type" options={[{label:'CORPORATE ORGANIZATION', value:'Corporate Organization'},{value:'PATIENT',label:'PATIENT'}]}/>
-              </>
-              
-            ):pharmacy? (
-              <>
-              
+     
+                 <>
               <CustomInput
                 type="text"
                 placeholder="Business Name"
@@ -224,22 +244,27 @@ const onSubmit =async(data:any)=>{
             placeholder="Email Address"
             name="email"
           />
-          <CustomInput
+      <div className=" flex gap-4">
+      <CustomInput
             placeholder="Password"
             name="password"
             label=""
             type={showPassword ? 'text' : 'password'}
        handleShowPassword={()=>setShowPassword(!showPassword)}
           />
-          <CustomSelect label=""  name="type" options={[{label:'COMMUNITY PHARMACY', value:'COMMUNITY_PHARMACY'},{value:'HOSPITAL/CLINIC PHARMACY',label:'HOSPITAL/CLINIC PHARMACY'}]}/>
+          <CustomInput name="address" label="" placeholder="Address" />
+      </div>
+          <CustomSelect label=""  name="type" options={[{label:'COMMUNITY PHARMACY', value:'COMMUNITY_PHARMACY'},{value:'HOSPITAL_PHARMACY',label:'HOSPITAL_PHARMACY'}, {value:'CLINIC_PHARMACY', label:'CLINIC PHARMACY'}, {value:'DISTRIBUTOR', label:'DISTRIBUTOR'}]}/>
 
               </>
-            ):null
-          }
-
+      
           <Button isLoading={isSubmitting} size="lg" type="submit"> Create an Account</Button>
         </Form>
       </Formik>
+    )
+  }
+               
+
 
         <ContinueWith />
 

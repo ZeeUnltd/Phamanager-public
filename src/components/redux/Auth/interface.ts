@@ -3,24 +3,36 @@ import { String } from "lodash";
 interface UserData {
     id: string;
     firstName: string;
+    businessName:string;
     lastName: string;
     type: 'PATIENT'|'DISTRIBUTOR';
     email: string;
     createdAt: string;
     updatedAt: string;
   }
+  interface Pharmacy {
+    id: string;
+    businessName: string;
+    type: string;
+    email: string;
+    isVerified: boolean;
+    createdAt: string;
+    updatedAt: string;
+}
+
   
   export interface user {
     status: string;
     data: {
       accessToken: string;
       refreshToken: string;
-      user: UserData;
+      pharmacy: Pharmacy;
     };
   }
   
- export  interface userAccessToken {
-    accessToken :string
+ export  interface  decodedToken {
+    accessToken :string;
+    expeireDate:number
   }
 
   export interface patientRegistration {

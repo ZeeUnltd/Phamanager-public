@@ -32,6 +32,8 @@ const ManageInventory = () => {
       title: "View all inventories",
       link: "inventory",
       icon: <GrFormView size="1.5rem" />,
+      action:()=>setPage('inventory')
+      
     },
   ];
 
@@ -75,7 +77,7 @@ const ManageInventory = () => {
               <h2 className="text-[22px] font-semibold text-text">
                 Recent Activities
               </h2>
-              <p className="text-formBlue underline text-[20px]">View All</p>
+              <p onClick={()=>setPage('inventory')} className="text-formBlue underline text-[20px] hover:cursor-pointer">View All</p>
             </div>
             {isEmpty && (
               <EmptyShelf

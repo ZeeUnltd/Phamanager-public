@@ -2,6 +2,9 @@ import facebook from "../assets/images/footerIcons/fb.png";
 import google from "../assets/images/footerIcons/Google.svg";
 
 function ContinueWith() {
+
+
+  
   return (
     <div className="w-[550px] flex flex-col gap-12">
       <div className=" relative">

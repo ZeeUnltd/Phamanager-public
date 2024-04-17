@@ -5,7 +5,7 @@ import { Dispatch } from "redux";
 import axios from "axios";
 import { loginProps, patientRegistration, pharmacyRegistration } from "./interface";
 import setAuthToken from "../../../lib/setAuthToken";
-import { setUserAccessToken } from ".";
+import { setUser, setUserAccessToken } from ".";
 
 
 
@@ -56,7 +56,7 @@ export const  pharmacy_Registration= (data:pharmacyRegistration)=>async(disaptch
 try {
     const response = await axios.post(`${baseUrl.auth}/pharmacy/signup`, data)
     toast.success(response.data.message)
-    disaptch(setUserAccessToken(response.data.accessToken))
+    // disaptch(setUserAccessToken(response.data.accessToken))
     return true
 } catch (error) {
     handleErrors(error)
@@ -66,8 +66,9 @@ try {
 
 export const login =(data:loginProps)=>async(dispatch:Dispatch)=>{
     try {
-        const response = await axios.post(`${baseUrl.auth}/login`, data)
-        toast.success(response.data.message)
+        const response = await axios.post(`${baseUrl.auth}/pharmacy/login`, data)
+        toast.success(response.data.status)
+       dispatch(setUser(response.data))
         return true
     } catch (error) {
         handleErrors(error)
