@@ -27,7 +27,7 @@ interface UserData {
       accessToken: string;
       refreshToken: string;
       pharmacy: Pharmacy;
-    };
+    }
   }
   
  export  interface  decodedToken {

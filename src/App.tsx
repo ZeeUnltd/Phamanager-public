@@ -18,7 +18,8 @@ const App = () => {
     },
   }}
 />
-        <RouterProvider router={router} /></>
+        <RouterProvider router={router} />
+        </>
     )
 } ;
 

@@ -11,10 +11,10 @@ import { login } from "../components/redux/Auth/features";
 import Cookies from "universal-cookie";
 import jwt, { jwtDecode } from  "jwt-decode"
 import { setUserAccessToken } from "../components/redux/Auth";
-import { decodedToken } from "../components/redux/Auth/interface";
+
 function Login() {
 
-  const [callbackUrl, setCallBackUrl] = useState<string | null>(null)
+
 
   const cookies = new Cookies()
   const dispatch = useAppDispatch()
@@ -22,30 +22,17 @@ function Login() {
 
 
   useEffect ( ()=>{
-    if(user){
-      const decodedToken = jwtDecode<decodedToken>(user?.data.accessToken)
-      cookies.set("jwt_authorization", decodedToken)
-      
-      dispatch(setUserAccessToken(decodedToken))
-    }else{
-      const storedToken = cookies.get('accessToken')
-      if(storedToken){
-        const decodedStoredToken = jwtDecode<decodedToken>(storedToken)
-        dispatch(setUserAccessToken(decodedStoredToken))
-      }
-    }
+  if(user){
+    localStorage.setItem('user', JSON.stringify(user))
+    localStorage.setItem('get-token', user.data.accessToken)
+  }
   },[user, dispatch])
 
-//   useEffect(() => {
-//     const queryParams = new URLSearchParams(window.location.search);
-//     if (queryParams.has('callbackUrl')) {
-//         setCallBackUrl(queryParams.get('callbackUrl'));
-//     }
-// }, []);
 
   const [showpassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
 
+console.log(localStorage.getItem('user'));
 
   // const buyer = false;
   const navigate = useNavigate();
@@ -60,58 +47,21 @@ function Login() {
       password:Yup.string().required('Password is Required'),
   });
 
-  // const loginHandler = (e: FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   console.log(newUser);
 
-  //   async function action() {
-  //     const response = await fetch(
-  //       `https://pharmanager-backend.onrender.com/auth/${
-  //         buyer ? "" : "pharmacy/"
-  //       }login`,
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-type": "application/json",
-  //         },
-  //         body: JSON.stringify(newUser),
-  //       }
-  //     );
-
-  //     if (response.ok) {
-  //       const resData = await response.json();
-  //       // const data = resData.data;
-  //       // const token = data.id;
-  //       console.log(resData.data.accessToken, resData.data.refreshToken);
-  //       if (buyer) {
-  //         return navigate("/");
-  //       } else return navigate("/");
-  //       // console.log(`${response.status}: ${JSON.stringify(resData)}`);
-  //     } else if (response.status === 409) {
-  //       console.log(`${response.status}: ${await response.text()}`);
-  //       // Handle conflict error, inform the user, etc.
-  //     } else {
-  //       console.log(`${response.status}: ${await response.text()}`);
-  //       // Handle other errors
-  //     }
-  //   }
-  //   action();
-  // };
+ 
   const onSubmit=async(data:any)=>{
     setLoading(true)
     let submitted = await dispatch(login(data))
     if(submitted){
-      console.log('login successful');
-      
+     
+      navigate('/dashboard')
     }
     setLoading(false)
   }
 
   return (
       <>
-   {
-    user?(<div>Hello {user.data.pharmacy.businessName}</div>):(
-      <main className="bg-[#E6F2FB] p-3  flex items-start justify-between font-Euclid text-xl">
+ <main className="bg-[#E6F2FB] p-3  flex items-start justify-between font-Euclid text-xl">
       <div className="w-[50%]">
         <img src={loginImage} alt="" className="w-full h-full" />
       </div>
@@ -166,8 +116,6 @@ function Login() {
         </div>
       </div>
     </main>
-    )
-   }
       </>
   );
 }

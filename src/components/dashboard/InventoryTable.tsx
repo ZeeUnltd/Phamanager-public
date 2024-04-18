@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { InventoryContext } from "../../store/inventoryContext";
 import InventoryTableRow from "./InventoryTableRow";
+import { useAppDispatch } from "../redux/store";
 
 type Inventory = {
   id: string;
@@ -16,6 +17,8 @@ type Inventory = {
 };
 
 const InventoryTable = () => {
+  const dispatch = useAppDispatch()
+
   const context = useContext(InventoryContext) ?? {
     renderedData: [],
   };

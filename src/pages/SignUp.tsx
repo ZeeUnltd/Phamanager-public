@@ -21,16 +21,11 @@ function SignUp() {
 
   const dispatch =useAppDispatch()
   const getToken = useAppSelector(state=>state.auth.decodedToken)
-  const token:string|any = getToken
+  // const token:string|any = getToken
 
-
-  function setHttpOnlyCookie(name:string, value:string, days:number) {
-    const expires = days ? `; expires=${new Date(Date.now() + days * 24 * 60 * 60 * 1000).toUTCString()}` : '';
-    document.cookie = `${name}=${value || ''}${expires}; path=/; Secure; HttpOnly`;
-  }
 
   const navigate = useNavigate();
-  console.log(token);
+  // console.log(token);
   
 
 

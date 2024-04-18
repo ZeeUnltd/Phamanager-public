@@ -18,7 +18,11 @@ const ManageInventory = () => {
   const isEmpty = false;
   const show = useAppSelector(state=>state.utils.show)
   const Dispatch = useAppDispatch()
+  const inventory = useAppSelector(state=>state.inventory.inventory)
 
+
+  console.log(inventory);
+  
   const topBtnOptions = [
     {
       id: 0,
