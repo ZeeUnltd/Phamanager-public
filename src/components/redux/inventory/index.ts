@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
+import { inventory } from "./interface"
 
 interface inventoryState{
 inventory:inventory|null

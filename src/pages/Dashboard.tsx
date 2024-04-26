@@ -1,20 +1,34 @@
-import React, { useEffect, useInsertionEffect } from 'react';
+import React, { useEffect, useInsertionEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../components/redux/store';
 // import { getUser } from '../components/redux/user/feature';#
 import RefreshToken from '../hooks/useRefreshToken';
 import useRefreshToken from '../hooks/useRefreshToken';
 import { getAllInvetory } from '../components/redux/inventory/features';
 import { refreshToken } from '../components/redux/Auth/features';
+import { fetchData } from 'next-auth/client/_utils';
+import axios from 'axios';
 
 const Dashboard = () => {
   const dispatch = useAppDispatch();
-  const refresh = useRefreshToken()
-  const inventory = useAppSelector(state=>state.inventory.inventory)
+  const [refresh, setRefresh] = useState({})
 
-  useEffect(()=>{
-    dispatch(getAllInvetory())
-  },[dispatch])
+
   // const users = useAppSelector(state => state.user.user);
+  useEffect(()=>{
+
+    const fetchData=async()=>{
+      try {
+        const response = await axios.post('https://pharmanager-backend.onrender.com/auth/refresh-token')
+        
+        setRefresh(response.data)
+        return true
+      } catch (error:any) {
+        console.log(error.message);
+        
+      }
+    }
+    fetchData()
+  },[])
   const auth =useAppSelector(state=>state.auth.Auth)
   
 
@@ -28,9 +42,9 @@ const Dashboard = () => {
     console.log(auth);
     
   }
-  
-  console.log(inventory);
-  
+    
+
+
   
   
 

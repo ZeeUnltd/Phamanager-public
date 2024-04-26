@@ -1,21 +1,11 @@
 import OptionButton from "../OptionButton";
 import { options } from "../../constants/inventory/index";
+import { InventoryItem } from "../redux/inventory/interface";
 
-type Inventory = {
-  id: string;
-  name: string;
-  category: string;
-  brand: string;
-  quantity: number;
-  unit: string;
-  price: number;
-  minStatus: boolean;
-  minAmount: number;
-  status: string;
-};
+
 
 type InventoryTableProps = {
-  inventory: Inventory;
+  inventory: InventoryItem;
 };
 
 const InventoryTableRow = ({ inventory }: InventoryTableProps) => {
@@ -34,24 +24,24 @@ const InventoryTableRow = ({ inventory }: InventoryTableProps) => {
           {inventory.id}
         </label>
       </div>
-      <div className="w-[20%]">{inventory.name}</div>
+      <div className="w-[20%]">{inventory.itemName}</div>
       <div className="w-[20%]">{inventory.brand}</div>
       <div className="w-[18%]">{inventory.quantity}</div>
       <div className="w-[15%]">
         <p
-          className={`p-2 border-2 rounded-xl text-center text-base ${
-            inventory.status.toLocaleLowerCase() === "available" &&
-            `bg-[#9FF1CA]  border-[#15A273]`
-          }  ${
-            inventory.status.toLocaleLowerCase() === "alerted" &&
-            `bg-[#eabeb1] text-[#c34722] border-[#c34722]`
-          }`}
+          // className={`p-2 border-2 rounded-xl text-center text-base ${
+          //   inventory.status.toLocaleLowerCase() === "available" &&
+          //   `bg-[#9FF1CA]  border-[#15A273]`
+          // }  ${
+          //   inventory.status.toLocaleLowerCase() === "alerted" &&
+          //   `bg-[#eabeb1] text-[#c34722] border-[#c34722]`
+          // }`}
         >
           {inventory.status}
         </p>
       </div>
       <div className="flex justify-center items-center w-[9%]">
-        <OptionButton inventory={inventory} options={options} />
+        {/* <OptionButton inventory={inventory} options={options} /> */}
       </div>
     </div>
   );

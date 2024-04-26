@@ -22,10 +22,10 @@ const ManageInventory = () => {
   const inventory = useAppSelector(state=>state.inventory.inventory)
 
 
-  // useEffect(()=>{
-  //   Dispatch(getAllInvetory())
-  // },[Dispatch])
-  // console.log(inventory);
+  useEffect(()=>{
+    Dispatch(getAllInvetory())
+  },[Dispatch])
+  console.log(inventory);
   
   const topBtnOptions = [
     {

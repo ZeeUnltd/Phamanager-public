@@ -1,4 +1,4 @@
-interface InventoryItem {
+export interface InventoryItem {
     id: number;
     inventoryId: string;
     itemName: string;
@@ -12,9 +12,10 @@ interface InventoryItem {
     createdAt: string;
     updatedAt: string;
     pharmacyId: string;
+    status?:string
 }
 
-interface inventory {
+export interface inventory {
     status: string;
     data: InventoryItem;
 }

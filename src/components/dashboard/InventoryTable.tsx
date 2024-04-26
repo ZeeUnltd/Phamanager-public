@@ -1,7 +1,10 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { InventoryContext } from "../../store/inventoryContext";
 import InventoryTableRow from "./InventoryTableRow";
-import { useAppDispatch } from "../redux/store";
+import { useAppDispatch, useAppSelector } from "../redux/store";
+import { getAllInvetory } from "../redux/inventory/features";
+
+import { InventoryItem, inventory } from "../redux/inventory/interface";
 
 type Inventory = {
   id: string;
@@ -18,12 +21,16 @@ type Inventory = {
 
 const InventoryTable = () => {
   const dispatch = useAppDispatch()
+  const allInventory = useAppSelector(state=>state.inventory.inventory)
 
-  const context = useContext(InventoryContext) ?? {
-    renderedData: [],
-  };
+  useEffect(()=>{
+    dispatch(getAllInvetory())
+  }, [dispatch])
 
-  const { renderedData } = context;
+
+  console.log(allInventory);
+  const inventories:any = allInventory?.data
+  
 
   return (
     <div className="w-full my-8">
@@ -47,7 +54,7 @@ const InventoryTable = () => {
         <div className="w-[9%]"></div>
       </div>
       <div className="">
-        {renderedData.map((inventory: Inventory, index: number) => (
+        {inventories.map((inventory: InventoryItem, index: number) => (
           <InventoryTableRow key={inventory.id + index} inventory={inventory} />
         ))}
       </div>
