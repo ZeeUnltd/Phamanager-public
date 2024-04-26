@@ -52,3 +52,16 @@ interface UserData {
     email:string,
     password:String
   }
+  export interface Auth{
+    // userData:{
+    //   id: string;
+    //   businessName: string;
+    //   type: string;
+    //   email: string;
+    //   isVerified: boolean;
+    //   createdAt: string;
+    //   updatedAt: string;
+    // }|null,
+    accessToken:string|null,
+    // refreshToken:string|null
+  }

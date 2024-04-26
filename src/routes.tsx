@@ -23,6 +23,9 @@ import ManageClients from "./pages/ManageClients";
 import ManageProcurement from "./pages/ManageProcurement";
 import Inventory from "./components/dashboard/Inventory";
 
+
+const types = {} 
+
 const router = createBrowserRouter([
   { path: "sign-up", element: <SignUp /> },
   { path: "login", element: <Login /> },
@@ -40,7 +43,7 @@ const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <DashboardLayout />,
+    element: <DashboardLayout  />,
     children: [
       { index: true, element: <Dashboard /> },
       { path: "inbounds", element: <Inbounds /> },

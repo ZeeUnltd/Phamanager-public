@@ -1,31 +1,44 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useInsertionEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../components/redux/store';
-import { getUser } from '../components/redux/user/feature';
+// import { getUser } from '../components/redux/user/feature';#
+import RefreshToken from '../hooks/useRefreshToken';
+import useRefreshToken from '../hooks/useRefreshToken';
+import { getAllInvetory } from '../components/redux/inventory/features';
+import { refreshToken } from '../components/redux/Auth/features';
 
 const Dashboard = () => {
   const dispatch = useAppDispatch();
-  const users = useAppSelector(state => state.user.user);
+  const refresh = useRefreshToken()
+  const inventory = useAppSelector(state=>state.inventory.inventory)
 
-  // useEffect(() => {
-  //   dispatch(getUser());
-  // }, [dispatch]);
+  useEffect(()=>{
+    dispatch(getAllInvetory())
+  },[dispatch])
+  // const users = useAppSelector(state => state.user.user);
+  const auth =useAppSelector(state=>state.auth.Auth)
+  
 
-  // const click = async()=>{
-  //   await dispatch(getUser())
-  // }
-  // Check if users is null or undefined
-  // if (!users) {
-  //   return <div>Loading...</div>; // Or any other loading indicator
-  // }
 
-  // Handle the case where users is not null or undefined
-  console.log(users);
-  console.log(localStorage.getItem('get-token'));
+
+  // console.log(auth);
+
+  // console.log(auth);
+  const onClick =async()=>{
+    dispatch(refreshToken())
+    console.log(auth);
+    
+  }
+  
+  console.log(inventory);
+  
+  
+  
 
   return (
   <>
     <div>Dashboard</div>
-    {/* <button onClick={click}>hey</button> */}
+    <button onClick={onClick}>refresh</button>
+
   </>
   );
 };

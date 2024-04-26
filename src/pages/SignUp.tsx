@@ -9,7 +9,7 @@ import CustomSelect from "../components/Forms/customSelect.js";
 import { Button } from "../components/elements/button.js";
 import * as Yup from 'yup'
 import { useAppDispatch, useAppSelector } from "../components/redux/store.js";
-import { patient_Registration, pharmacy_Registration } from "../components/redux/Auth/features.js";
+// import { patient_Registration, pharmacy_Registration } from "../components/redux/Auth/features.js";
 
 function SignUp() {
   const [signupAs, setSignupAs] = useState("drug buyer");
@@ -85,15 +85,18 @@ const onSubmit =async(data:any)=>{
   if(buyer){
     setIsSubmitting(true)
 
-    let  submit = await dispatch(patient_Registration(data))
+    // let  submit = await dispatch(patient_Registration(data))
+    let submit
     if (submit) {
       console.log('submitted');
       
     }
   }else if(pharmacy){
   setIsSubmitting(true)
+  
 
-  let submit = await dispatch(pharmacy_Registration(data))
+  // let submit = await dispatch(pharmacy_Registration(data))
+  let submit 
   if (submit) {
     console.log('submitted');
     

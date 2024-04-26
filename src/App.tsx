@@ -1,12 +1,13 @@
 import { RouterProvider } from "react-router-dom";
 import router from "./routes";
 import { Toaster } from "sonner";
+import { AuthProvider } from "./AuthProvider";
 
 
 const App = () => {
     return(
         <>
-    <Toaster
+<Toaster
   position={"top-center"}
   toastOptions={{
  
@@ -19,6 +20,7 @@ const App = () => {
   }}
 />
         <RouterProvider router={router} />
+
         </>
     )
 } ;

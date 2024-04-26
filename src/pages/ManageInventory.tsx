@@ -5,13 +5,14 @@ import TopButton from "../components/dashboard/TopButton";
 import EmptyShelf from "../components/dashboard/EmptyShelf";
 import { FaCirclePlus } from "react-icons/fa6";
 import { GrFormView } from "react-icons/gr";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import InventoryItem from "../components/dashboard/InventoryItem";
 import AddInventoryModal from "../components/dashboard/AddInventoryModal";
 import Inventory from "../components/dashboard/Inventory";
 import { useAppDispatch, useAppSelector } from "../components/redux/store";
 import AddInventory from "../components/modals/addInventory";
 import { showItem } from "../components/redux/utils";
+import { getAllInvetory } from "../components/redux/inventory/features";
 
 const ManageInventory = () => {
   const [page, setPage] = useState("home");
@@ -21,7 +22,10 @@ const ManageInventory = () => {
   const inventory = useAppSelector(state=>state.inventory.inventory)
 
 
-  console.log(inventory);
+  // useEffect(()=>{
+  //   Dispatch(getAllInvetory())
+  // },[Dispatch])
+  // console.log(inventory);
   
   const topBtnOptions = [
     {

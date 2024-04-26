@@ -1,5 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useState, FormEvent, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState, FormEvent, useEffect, useContext } from "react";
 import ContinueWith from "../components/ContinueWith";
 import loginImage from "../assets/images/loginimage.jpg";
 import CustomInput from "../components/Forms/customInput";
@@ -10,32 +10,38 @@ import { useAppDispatch, useAppSelector } from "../components/redux/store";
 import { login } from "../components/redux/Auth/features";
 import Cookies from "universal-cookie";
 import jwt, { jwtDecode } from  "jwt-decode"
-import { setUserAccessToken } from "../components/redux/Auth";
+import { setAuth, setUserAccessToken } from "../components/redux/Auth";
+import AuthContext from "../AuthProvider";
 
 function Login() {
 
+  const location = useLocation()
+
+  // const from = location.state?.from?.pathName || "/dashboard"
+  const from = '/dashboard'
 
 
-  const cookies = new Cookies()
   const dispatch = useAppDispatch()
-  const user = useAppSelector(state=>state.auth.user)
+
+  const auth = useAppSelector(state=>state.auth.Auth)
+  const {set_Auth} =useContext(AuthContext)
 
 
-  useEffect ( ()=>{
-  if(user){
-    localStorage.setItem('user', JSON.stringify(user))
-    localStorage.setItem('get-token', user.data.accessToken)
-  }
-  },[user, dispatch])
+  
 
+  useEffect(()=>{
+ 
+  },[dispatch])
 
   const [showpassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
 
-console.log(localStorage.getItem('user'));
-
   // const buyer = false;
   const navigate = useNavigate();
+
+  const userDataString = localStorage.getItem("userData");
+const user = userDataString ? JSON.parse(userDataString) : null;
+
 
   
   const initialValues={
@@ -48,21 +54,33 @@ console.log(localStorage.getItem('user'));
   });
 
 
+  
  
   const onSubmit=async(data:any)=>{
     setLoading(true)
+    
     let submitted = await dispatch(login(data))
+
+   
+    
     if(submitted){
-     
+    
+      // navigate(from, {replace:true})
+
+      const accessToken = auth?.accessToken
+      set_Auth({accessToken})
       navigate('/dashboard')
     }
     setLoading(false)
   }
 
+  console.log(localStorage.getItem('accessToken'));
+
+
   return (
       <>
  <main className="bg-[#E6F2FB] p-3  flex items-start justify-between font-Euclid text-xl">
-      <div className="w-[50%]">
+      <div className="w-[50%]"> 
         <img src={loginImage} alt="" className="w-full h-full" />
       </div>
 

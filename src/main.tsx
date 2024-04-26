@@ -5,16 +5,19 @@ import "./index.css";
 import { InventoryContextProvider } from "./store/inventoryContext.tsx";
 import { Provider } from "react-redux";
 import { store } from "./components/redux/store.ts";
+import { AuthProvider } from "./AuthProvider.tsx";
 
 
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-   <Provider store={store}>
+<AuthProvider>
+<Provider store={store}>
    <InventoryContextProvider>
       <App />
     </InventoryContextProvider>
    </Provider>
+</AuthProvider>
 
   </React.StrictMode>
 );
