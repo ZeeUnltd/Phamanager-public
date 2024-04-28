@@ -1,6 +1,5 @@
 export const baseUrl = {
-auth:  `https://pharmanager-backend.onrender.com/auth`
-// auth:  `https://pharmanager-backend.onrender.com/auth/${
-//     buyer ? "" : "pharmacy/"
-//   }login`,
+auth:  `https://pharmanager-backend.onrender.com/auth`,
+
+inventory:'https://pharmanager-backend.onrender.com/manager/inventory'
 }

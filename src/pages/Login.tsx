@@ -1,28 +1,49 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useState, FormEvent } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState, FormEvent, useEffect, useContext } from "react";
 import ContinueWith from "../components/ContinueWith";
 import loginImage from "../assets/images/loginimage.jpg";
 import CustomInput from "../components/Forms/customInput";
 import { Formik, Form } from "formik";
 import { Button } from "../components/elements/button";
 import * as Yup from 'yup'
-import { useAppDispatch } from "../components/redux/store";
+import { useAppDispatch, useAppSelector } from "../components/redux/store";
 import { login } from "../components/redux/Auth/features";
+import Cookies from "universal-cookie";
+import jwt, { jwtDecode } from  "jwt-decode"
+import { setAuth, setUserAccessToken } from "../components/redux/Auth";
+import AuthContext from "../AuthProvider";
 
 function Login() {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
+
+  const location = useLocation()
+
+  // const from = location.state?.from?.pathName || "/dashboard"
+  const from = '/dashboard'
+
+
+  const dispatch = useAppDispatch()
+
+  const auth = useAppSelector(state=>state.auth.Auth)
+  const {set_Auth} =useContext(AuthContext)
+
+
+  
+
+  useEffect(()=>{
+ 
+  },[dispatch])
+
   const [showpassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const dispatch = useAppDispatch()
-  const buyer = false;
+  // const buyer = false;
   const navigate = useNavigate();
 
-  // const newUser = {
-  //   email: email,
-  //   password: password,
-  // };
+  const userDataString = localStorage.getItem("userData");
+const user = userDataString ? JSON.parse(userDataString) : null;
+
+
+  
   const initialValues={
     email:'',
     password:''
@@ -32,56 +53,34 @@ function Login() {
       password:Yup.string().required('Password is Required'),
   });
 
-  // const loginHandler = (e: FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   console.log(newUser);
 
-  //   async function action() {
-  //     const response = await fetch(
-  //       `https://pharmanager-backend.onrender.com/auth/${
-  //         buyer ? "" : "pharmacy/"
-  //       }login`,
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-type": "application/json",
-  //         },
-  //         body: JSON.stringify(newUser),
-  //       }
-  //     );
-
-  //     if (response.ok) {
-  //       const resData = await response.json();
-  //       // const data = resData.data;
-  //       // const token = data.id;
-  //       console.log(resData.data.accessToken, resData.data.refreshToken);
-  //       if (buyer) {
-  //         return navigate("/");
-  //       } else return navigate("/");
-  //       // console.log(`${response.status}: ${JSON.stringify(resData)}`);
-  //     } else if (response.status === 409) {
-  //       console.log(`${response.status}: ${await response.text()}`);
-  //       // Handle conflict error, inform the user, etc.
-  //     } else {
-  //       console.log(`${response.status}: ${await response.text()}`);
-  //       // Handle other errors
-  //     }
-  //   }
-  //   action();
-  // };
+  
+ 
   const onSubmit=async(data:any)=>{
     setLoading(true)
+    
     let submitted = await dispatch(login(data))
+
+   
+    
     if(submitted){
-      console.log('login successful');
-      
+    
+      // navigate(from, {replace:true})
+
+      const accessToken = auth?.accessToken
+      set_Auth({accessToken})
+      navigate('/dashboard')
     }
     setLoading(false)
   }
 
+  console.log(localStorage.getItem('accessToken'));
+
+
   return (
-    <main className="bg-[#E6F2FB] p-3  flex items-start justify-between font-Euclid text-xl">
-      <div className="w-[50%]">
+      <>
+ <main className="bg-[#E6F2FB] p-3  flex items-start justify-between font-Euclid text-xl">
+      <div className="w-[50%]"> 
         <img src={loginImage} alt="" className="w-full h-full" />
       </div>
 
@@ -91,20 +90,7 @@ function Login() {
        <Formik initialValues={initialValues} validationSchema={validationSchema}   onSubmit={onSubmit}>
        <Form
           className="w-[550px] flex  flex-col gap-10" >
-          {/* <input
-            required
-            type="text"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            placeholder="Email address/Unique Identification Number"
-            className="border-2 focus:outline-formBlue rounded-md p-4 w-full  border-slate-200"
-          /> */}
-          {/* <PasswordInput
-            placeholder="Password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            required
-          /> */}
+     
           <CustomInput name="email" label="Email" placeholder="Email/Unique Identification Number"/>
           <CustomInput name="password" label="Password"   placeholder='password'
               type={showpassword ? 'text' : 'password'}
@@ -148,6 +134,7 @@ function Login() {
         </div>
       </div>
     </main>
+      </>
   );
 }
 

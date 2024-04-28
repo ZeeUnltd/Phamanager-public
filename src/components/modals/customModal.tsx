@@ -21,7 +21,7 @@ const CustomModal: FC<Props> = ({ title, children, desc, size = "md", pad='8' })
     return (
         <>
             <div className="absolute top-0 left-0">
-                <div className="inset-0 fixed bg-[#B1B1B41A] w-screen overflow-y-auto z-50 h-[100vh] bg-opacity-80  px-3">
+                <div className="inset-0 fixed bg-[#0f0f401a] w-screen overflow-y-auto z-50 h-[100vh] bg-opacity-80  px-3">
                     <div data-aos="fade-down"
                         data-aos-duration="1000"
                         data-aos-easing="ease-in-out"

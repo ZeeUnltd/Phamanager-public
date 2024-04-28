@@ -11,6 +11,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
     if (status === "authenticated" && session) {
         setAuthToken(session && session?.user?.name)
     }
+
     
 
     return (

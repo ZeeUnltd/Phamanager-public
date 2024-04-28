@@ -5,20 +5,28 @@ import TopButton from "../components/dashboard/TopButton";
 import EmptyShelf from "../components/dashboard/EmptyShelf";
 import { FaCirclePlus } from "react-icons/fa6";
 import { GrFormView } from "react-icons/gr";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import InventoryItem from "../components/dashboard/InventoryItem";
 import AddInventoryModal from "../components/dashboard/AddInventoryModal";
 import Inventory from "../components/dashboard/Inventory";
 import { useAppDispatch, useAppSelector } from "../components/redux/store";
 import AddInventory from "../components/modals/addInventory";
 import { showItem } from "../components/redux/utils";
+import { getAllInvetory } from "../components/redux/inventory/features";
 
 const ManageInventory = () => {
   const [page, setPage] = useState("home");
   const isEmpty = false;
   const show = useAppSelector(state=>state.utils.show)
   const Dispatch = useAppDispatch()
+  const inventory = useAppSelector(state=>state.inventory.inventory)
 
+
+  useEffect(()=>{
+    Dispatch(getAllInvetory())
+  },[Dispatch])
+  console.log(inventory);
+  
   const topBtnOptions = [
     {
       id: 0,
@@ -32,6 +40,8 @@ const ManageInventory = () => {
       title: "View all inventories",
       link: "inventory",
       icon: <GrFormView size="1.5rem" />,
+      action:()=>setPage('inventory')
+      
     },
   ];
 
@@ -75,7 +85,7 @@ const ManageInventory = () => {
               <h2 className="text-[22px] font-semibold text-text">
                 Recent Activities
               </h2>
-              <p className="text-formBlue underline text-[20px]">View All</p>
+              <p onClick={()=>setPage('inventory')} className="text-formBlue underline text-[20px] hover:cursor-pointer">View All</p>
             </div>
             {isEmpty && (
               <EmptyShelf

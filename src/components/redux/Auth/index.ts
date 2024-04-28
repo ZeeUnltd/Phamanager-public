@@ -1,24 +1,38 @@
 import { Dispatch, PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { user, userAccessToken } from "./interface";
+import { Auth, decodedToken, user } from "./interface";
+import { login } from "./features";
 
 interface AuthState{
+    Auth:Auth|null
 user:user|null
-userAccessToken:userAccessToken|null
+decodedToken:decodedToken|null
 }
 const  initialState:AuthState ={
+    Auth:null,
 user:null,
-userAccessToken:null
+decodedToken:null
 }
 
 export const  authSlice = createSlice({
 name:"auth",
 initialState,
 reducers:{
-    setUserAccessToken:(state:AuthState, action:PayloadAction<userAccessToken>)=>{
-        state.userAccessToken = action.payload
+    setUserAccessToken:(state:AuthState, action:PayloadAction<decodedToken>)=>{
+        state.decodedToken= action.payload
+    },
+    setUser:(state:AuthState, action:PayloadAction<user>)=>{
+        state.user = action.payload
+    },
+    setAuth:(state:AuthState, action:PayloadAction<Auth>)=>{
+        state.Auth = action.payload
     }
+},
+extraReducers:(builder)=>{
+    builder.addCase(login.pending, (state, action)=>{
+        
+    })
 }
 })
 
 export default authSlice.reducer;
-export const {setUserAccessToken}=authSlice.actions
+export const {setUserAccessToken, setUser, setAuth}=authSlice.actions
