@@ -2,7 +2,6 @@ import React,{useEffect}  from "react";
 import Select from "react-select";
 import { Field, ErrorMessage, useField, useFormikContext } from "formik";
 import { colorStyles } from "../../lib/helper";
-import { useAppDispatch } from "../redux/store";
 
 interface SelectProps {
   label: string;
@@ -31,7 +30,6 @@ const CustomSelect: React.FC<SelectProps> = ({
 }) => {
   const [field, meta] = useField(name);
   const { setFieldValue } = useFormikContext();
-  const dispatch = useAppDispatch()
   
   const selectedOption = options?.find((option) => option.value === field.value);
 
