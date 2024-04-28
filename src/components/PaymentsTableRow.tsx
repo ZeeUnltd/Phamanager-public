@@ -48,7 +48,7 @@ function PaymentsTableRow({ payment }: PaymentsTableRowProps) {
         </p>
       </div>
       <div className="flex justify-center items-center w-[7%]">
-        <OptionButton options={options} />
+        {/* <OptionButton options={options} /> */}
       </div>
     </div>
   );

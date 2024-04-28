@@ -5,7 +5,6 @@ import RefreshToken from '../hooks/useRefreshToken';
 import useRefreshToken from '../hooks/useRefreshToken';
 import { getAllInvetory } from '../components/redux/inventory/features';
 import { refreshToken } from '../components/redux/Auth/features';
-import { fetchData } from 'next-auth/client/_utils';
 import axios from 'axios';
 
 const Dashboard = () => {

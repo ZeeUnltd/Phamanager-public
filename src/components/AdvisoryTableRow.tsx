@@ -46,7 +46,7 @@ function AdvisoryTableRow({ advisory }: AdvisoryTableRowProps) {
         </p>
       </div>
       <div className="flex justify-center items-center w-[10%]">
-        <OptionButton options={options} />
+        {/* <OptionButton options={options} /> */}
       </div>
     </div>
   );

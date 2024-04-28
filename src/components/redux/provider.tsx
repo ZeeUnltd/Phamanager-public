@@ -3,7 +3,7 @@
 import React from 'react';
 import { store } from './store';
 import { Provider } from 'react-redux';
-import { SessionProvider } from 'next-auth/react'
+
 import AuthLayout from '../../AuthLayout';
 import { Toaster } from 'sonner'
 
@@ -20,11 +20,9 @@ export function GlobalProvider({ children }: { children: React.ReactNode }) {
                 }}
             />
 
-            <SessionProvider>
-                <AuthLayout>
-                    {children}
+<AuthLayout>
+                {children}
                 </AuthLayout>
-            </SessionProvider>
         </Provider>
     )
 }

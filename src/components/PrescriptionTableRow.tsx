@@ -60,7 +60,7 @@ const PrescriptionTableRow = ({
             </p>
           </div>
           <div className="w-[5%] flex justify-center items-center">
-            <OptionButton options={availableOptions} />
+            {/* <OptionButton options={availableOptions} /> */}
           </div>
         </>
       )}
@@ -82,7 +82,7 @@ const PrescriptionTableRow = ({
             </p>
           </div>
           <div className="w-[5%] flex justify-center items-center">
-            <OptionButton options={accepteddispensedOptions} />
+            {/* <OptionButton options={accepteddispensedOptions} /> */}
           </div>
         </>
       )}
@@ -104,11 +104,11 @@ const PrescriptionTableRow = ({
             </p>
           </div>
           <div className=" flex justify-center items-center w-[5%]">
-            {prescription.dispensedStatus.toLowerCase() === "pending" ? (
+            {/* {prescription.dispensedStatus.toLowerCase() === "pending" ? (
               <OptionButton options={acceptedPendingOptions} />
             ) : (
               <OptionButton options={accepteddispensedOptions} />
-            )}
+            )} */}
           </div>
         </>
       )}
