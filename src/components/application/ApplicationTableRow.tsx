@@ -52,11 +52,11 @@ const ApplicationTableRow = ({ application }: ApplicationsTableProps) => {
         </p>
       </div>
       <div className="flex justify-center items-center w-[7%]">
-        {application.status.toLowerCase() === "quoted" ? (
+        {/* {application.status.toLowerCase() === "quoted" ? (
           <OptionButton options={quotedOptions} />
         ) : (
           <OptionButton options={otherOptions} />
-        )}
+        )} */}
       </div>
     </div>
   );
