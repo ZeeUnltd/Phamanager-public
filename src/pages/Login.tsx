@@ -8,9 +8,7 @@ import { Button } from "../components/elements/button";
 import * as Yup from 'yup'
 import { useAppDispatch, useAppSelector } from "../components/redux/store";
 import { login } from "../components/redux/Auth/features";
-import Cookies from "universal-cookie";
-import jwt, { jwtDecode } from  "jwt-decode"
-import { setAuth, setUserAccessToken } from "../components/redux/Auth";
+
 import AuthContext from "../AuthProvider";
 
 function Login() {
