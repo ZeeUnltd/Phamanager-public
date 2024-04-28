@@ -203,12 +203,7 @@ export const generateUniqueColors = (length: number) => {
         return predefinedColors.slice(0, length);
     } else {
         // If the requested length is greater, cycle through the predefined colors
-        const colors = [];
-        for (let i = 0; i < length; i++) {
-            const index = i % predefinedColors.length;
-            colors.push(predefinedColors[index]);
-        }
-        return colors;
+        return Array.from({ length }, (_, i) => predefinedColors[i % predefinedColors.length]);
     }
 }
 
@@ -248,20 +243,23 @@ export const groupPermission = (sortedData: PermissionItem[]) => {
 }
 
 
-export function removeDuplicatesPermissions(data:any) {
-    const uniqueRows = [];
-    const seen = new Set();
+// export function removeDuplicatesPermissions(data: any[]|never) {
+//     const uniqueRows = [];
+//     const seen = new Map();
 
-    for (const row of data) {
-        const key = row.name + row.data;
-        if (!seen.has(key)) {
-            seen.add(key);
-            uniqueRows.push(row);
-        }
-    }
+//     for (const row of data) {
+//         const { name, data: rowData } = row; // Object destructuring
+//         const key = `${name}-${rowData}`; // Using template literals
 
-    return uniqueRows;
-}
+//         if (!seen.has(key)) {
+//             seen.set(key, true);
+//             uniqueRows.push(row);
+//         }
+//     }
+
+//     return uniqueRows;
+// }
+
 
 
 export const mappedObject = (data: StatusData | undefined) => {
