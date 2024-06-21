@@ -1,0 +1,26 @@
+.btn{
+    display: inline-block;
+    border: none;
+    background: none;
+    outline: none;
+    width: 200px;
+    border: 1px solid #54A4CC;
+    height: 40px;
+    border-radius: 5px;
+    color: #54A4CC;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .2s all ease-in;
+    text-transform: none;
+
+    &:hover{
+        background-color: lighten($color: #54A4CC, $amount: 40);
+        transform: scale(99%);
+    }
+}
+
+.icon{
+    font-size: 22px;
+    margin-right: 10px ;
+}

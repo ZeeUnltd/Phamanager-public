@@ -1,0 +1,58 @@
+.counter-box {
+    display: flex;
+    color: #252525;
+    justify-content: space-between;
+    margin-bottom: 1em;
+    margin-left: 1.4em;
+    padding-block: 0.8rem;
+    width: 410px;
+}
+
+.counter-box .counter, .counter-box .price{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #dddada;
+    width: 45%;
+}
+
+.counter-box h3 {
+    padding: 1.15rem 2rem;
+    background-color: #eeeaea;
+    color: #4B4B4B;
+    font-weight: 100;
+    font-size: 12px;
+}
+
+.counter-box span {
+    font-weight: 100;
+    font-size: 12px;
+}
+
+.counter-box img{
+    width: 40px;
+}
+
+.counter .lower-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-block: 1.5rem;
+}
+.price .lower-box {
+    padding-left: 2.6em;
+}
+
+.price h3 {
+    padding-left: 3.3em;
+}
+.price .lower-box div {
+    padding-top: .5em;
+}
+
+.counter .lower-box span, .counter .lower-box img{
+    padding-right: .6em;
+}
+
+.counter .lower-box span{
+    font-size: 1em;
+}

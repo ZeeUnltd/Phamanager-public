@@ -1,0 +1,43 @@
+.checkout-page {
+    padding: 2em;
+}
+
+.checkout-page .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.checkout-page .checkout-items {
+    display: flex;
+    /* width: 100%; */
+}
+
+.checkout-items, .checkout-items div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.checkout-items {
+    align-items: flex-end;
+    flex-direction: column;
+}
+
+.checkout-items div, .checkout-items .c-button {
+    background: #54A4CC;
+    color: white;
+    padding: .8em 2em;
+    font-size: 12px;
+    margin-top: 40px;
+    border: none;
+    width: 50%;
+}
+
+.checkout-items .c-button {
+    background-color: #009fe3;
+}
+
+.checkout-items button {
+    padding: 1em 2em;
+}

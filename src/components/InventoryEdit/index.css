@@ -1,0 +1,121 @@
+.card {
+    width: 181px;
+    height: fit-content;
+    font-size: small;
+    flex-grow: 1;
+    flex-shrink: 0;
+    transform: scale(0.8);
+    transform-origin: top left;
+    border: 1px solid rgba(232, 232, 238, 0.24);
+    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.15) inset;
+    border-radius: 1rem;
+  }
+  
+  p {
+    color: #000;
+  }
+  
+  .card p {
+    padding: 0.5em 0 0.2em 1em;
+  }
+  .image-card {
+    width: 100%;
+    height: 70%;
+    position: relative;
+  }
+  
+  .info-wrap {
+    position: absolute;
+    width: 100%;
+    bottom: -7.5%;
+    left: 0;
+    background-color: #fff;
+    border-bottom: 1px solid rgba(232, 232, 238, 0.24);
+    border-left: 1px solid rgba(232, 232, 238, 0.24);
+    border-right: 1px solid rgba(232, 232, 238, 0.24);
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    transition: all 750ms;
+  }
+  
+  .info-wrap:active {
+    background-color: blue
+  }
+  
+  .info-wrap > p {
+    color: #000;
+  }
+  
+  .image-card .drug-type {
+    position: absolute;
+    bottom: 0;
+    display: inline-block;
+    padding: 0.6em 60px 0.4em 20px;
+    background-color: #54a4cc;
+    color: white;
+  }
+  
+  .location {
+    margin-top: 0.25rem;
+    display:  flex;
+    justify-content: space-between;
+  }
+
+  .location > img {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .location > p,
+  .location > div > p,
+  .tablet-size {
+    font-family: IBM Plex Sans, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    line-height: 1rem;
+  }
+  
+  /* .card-details {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+  } */
+  /* .location > div,
+  .details > div {
+    display: flex;
+    align-items: center;
+  } */
+  
+  /* .location div img,
+  .details img {
+    display: inline;
+    width: fit-content;
+  }
+  
+  .location div:first-child,
+  .details div:first-child {
+    padding-right: 1em;
+  } */
+  
+  .card-base {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* background-color: #54a4cc; */
+    color: #000;
+    padding-right: 1em;
+    border: 1px;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+  }
+  .edit{
+    font-family: IBM Plex Sans, sans-serif;
+    font-size: 0.7rem;
+    font-weight: 300;
+    line-height: 0.75rem;
+    color: rgba(0, 159, 227, 1);
+
+  }
+  
+  
+  

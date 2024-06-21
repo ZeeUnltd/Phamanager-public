@@ -1,0 +1,63 @@
+.drug-item-container {
+  width: 90%;
+}
+
+.drug-dispensary {
+  align-self: stretch;
+  height: 100%;
+  flex: 1;
+  box-sizing: border-box;
+  display: flex;
+  border: 2px solid rgb(201, 196, 196);
+  box-shadow: 2px 1px 2px 1px rgb(211, 204, 204);
+  padding: 0.8em 0 0.8em 0.8em;
+  font-size: 12px;
+  margin-top: 1rem;
+  color: #252525;
+}
+
+.drug-dispensary img {
+  width: 25%;
+}
+/* .drug-dispensary p {
+  margin-top: 2.6em;
+  font-size: 13px;
+  color: #54a4cc;
+} */
+
+.drug-dispensary .description {
+  padding-left: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.description h3 {
+  margin: 0;
+}
+
+.drug-name {
+  font-family: Euclid Circular A, sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 1.5rem;
+  letter-spacing: 0.002em;
+}
+
+.brand-name {
+  font-family: Euclid Circular A, sans-serif;
+  font-size: 0.75rem;
+  font-weight: bold;
+  line-height: 1.5rem;
+  letter-spacing: 0.002em;
+  margin-bottom: 2rem;
+}
+
+.cart-tabletSize {
+  font-family: Euclid Circular A, sans-serif;
+  font-size: 0.75rem;
+  font-weight: bold;
+  line-height: 1.5rem;
+  letter-spacing: 0.002em;
+}

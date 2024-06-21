@@ -213,7 +213,7 @@ const AddInventoryModal = (props: props) => {
         <div className="mt-8 flex justify-center items-center">
           <button
             className="text-white text-[16px] font-medium bg-[#009FE3] rounded-md px-6 py-3"
-            onClick={() => setShowInnerModal(true)}
+            onClick={() => {setShowInnerModal(true);  console.log(showInnerModal, inventoryCreated)}}
           >
             Add Inventory
           </button>

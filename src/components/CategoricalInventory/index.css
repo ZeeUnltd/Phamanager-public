@@ -1,0 +1,33 @@
+.category .array{
+    display: flex;
+    overflow: scroll;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 0;
+    padding: 0;
+}
+.category .top-layer {
+    display: flex;
+    justify-content: space-between;
+}
+.top-layer .arrow {
+    display: flex;
+    width: 50px;
+    margin-right: 50px;
+}
+.top-layer .arrow img {
+    padding-right: .3em;
+}
+.category {
+    display: flex;
+    flex-direction: column;
+}
+
+.category ::-webkit-scrollbar {
+    display: none;
+}
+
+.category h2 {
+    margin-bottom: 2.5em;
+    font-size: 20px;
+}

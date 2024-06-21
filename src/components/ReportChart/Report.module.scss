@@ -1,0 +1,33 @@
+.chart {
+    display: flex;
+    position: relative;
+    width: 300px;
+    height: 270px;
+    justify-content: center;
+    align-items: center;
+
+    &__middle_text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+    &__circle {
+        background-color: #938AF5;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+    }
+    &__green {
+        background-color: #9FF1CA;
+    }
+    &__line {
+        padding-left: 2em;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 50%;
+        height: 3em;
+    }
+}

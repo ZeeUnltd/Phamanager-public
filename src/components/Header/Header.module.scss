@@ -1,0 +1,76 @@
+@use "../../scss/abstracts/" as *;
+
+.navTitle {
+    h1 {
+        margin-bottom: 20px;
+        margin-top: 20px;
+        font-size: 30px;
+        font-weight: 600;
+    }
+    &_text {
+        display: flex;
+        &_arrow {
+          width: 30px;
+          height: 30px;
+          background-color: rgb(75, 70, 70);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: 10px;
+        }
+    }
+    &_right {
+      display: flex;
+      flex-direction: column;
+      &_id {
+        text-align: right;
+        font-size: 13px;
+        letter-spacing: 0.06em;
+        padding-right: 4em;
+        font-weight: 100;
+      }
+    }
+      &_cart {
+          width: 40px;
+        height: 40px;
+        // background-color: rgb(216, 212, 212);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 20px;
+        position: relative;
+  
+        div {
+          position: absolute;
+          font-size: 10px;
+          color: white;
+          background-color: #ffd207;
+          border-radius: 50%;
+          padding: .7em;
+          width: 10px;
+          height: 10px;
+          top: 0;
+          right: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+      &_cart:hover  {
+        background-color: #eeeaea;
+      }
+    // }
+    &_user {
+      margin-left: 20px;
+      width: 30px;
+      height: 30px;
+      background-color: #E0CA04;
+      padding: 1.2em;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+}

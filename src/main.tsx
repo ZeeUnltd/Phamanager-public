@@ -5,16 +5,19 @@ import "./index.css";
 import { InventoryContextProvider } from "./store/inventoryContext.tsx";
 import { Provider } from "react-redux";
 import { store } from "./components/redux/store.ts";
-import { AuthProvider } from "./AuthProvider.tsx";
+import { AuthProvider } from "./AuthProvider";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
-
+const queryClient =  new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
 <AuthProvider>
-<Provider store={store}>
+  <Provider store={store}>
    <InventoryContextProvider>
-      <App />
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
     </InventoryContextProvider>
    </Provider>
 </AuthProvider>

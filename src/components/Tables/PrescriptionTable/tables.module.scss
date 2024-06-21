@@ -1,0 +1,133 @@
+@use '../../../scss/global' as *;
+@use '../../../scss/abstracts/_variables.scss' as *;
+
+.filter_container {
+ background-color: hsla(200, 54%, 56%, 0.2);
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ width: fit-content;
+ padding: 5px;
+ border-radius: 50px;
+
+ div {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 50px;
+    margin-right: 10px;
+    font-size: 16px;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &.active {
+        background-color: var(--primaryColor);
+        color: #FFFFFF;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+ }
+}
+
+table {
+    width: 100%;
+    margin-top: 39px;
+    margin-bottom: 39px;
+    font-size: $fontSizeBodyMedium;
+
+    thead {
+        text-align: left;
+        font-weight: bold;
+        width: 100%;
+        tr {
+            display: inline-flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 10px;
+
+            th {
+                width: 20%;
+            }
+        }
+    }
+
+    tbody {
+        width: 100%;
+
+        tr {
+            display: inline-flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 10px;
+
+            &:nth-child(odd) {
+                border: 1px solid hsla(0, 0%, 85%, 1);
+                width: 100%;
+                padding: 10px;
+            }
+
+            td {
+                width: 20%
+            }
+        }
+    }
+}
+
+.pending {
+    background-color: hsla(40, 100%, 50%, 0.31);
+    color: #FFA902;
+    border: 1px solid #FFA902;
+    border-radius: 8px;
+    text-align: center;
+    width: 100px;
+}
+.quoted {
+    background-color: hsla(14, 98%, 37%, 0.31);
+    color: #BA2D02;
+    border: 1px solid #BA2D02;
+    border-radius: 8px;
+    text-align: center;
+    width: 100px;
+}
+.dispensed {
+    background-color: #9FF1CA;
+    color: #049561;
+    border: 1px solid #049561;
+    border-radius: 8px;
+    text-align: center;
+    width: 100px;
+}
+
+.filter_bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 39px;
+
+    .filterButton {
+        display: flex;
+        align-items: center;
+        border: 1px solid var(--primaryColor);
+        border-radius: 20px;
+        padding: 10px 20px;
+        color: var(--primaryColor);
+
+        span {
+            margin-left: 5px;
+        }
+    }
+}
+
+.item_menu {
+    // margin-top: auto;
+    // margin-bottom: auto;
+    // height: fit-content;
+
+    .menu_items {
+        // z-index: 1;
+        box-shadow: 0 2px 2px 0 #000;
+        height: fit-content;
+        width: 200px;
+    }
+}

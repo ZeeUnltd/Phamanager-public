@@ -1,58 +1,61 @@
-import React, { useEffect, useInsertionEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../components/redux/store';
-// import { getUser } from '../components/redux/user/feature';#
-import RefreshToken from '../hooks/useRefreshToken';
-import useRefreshToken from '../hooks/useRefreshToken';
-import { getAllInvetory } from '../components/redux/inventory/features';
-import { refreshToken } from '../components/redux/Auth/features';
-import axios from 'axios';
+import React, {
+  useEffect,
+  useInsertionEffect,
+  useState,
+  useContext,
+} from "react";
+
+import { useNavigate, useLocation, useParams } from "react-router-dom";
+import useAxiosPrivate from "../api/useAxiosPrivate";
+import AuthContext from "../AuthProvider";
+
+interface User {
+  businessName: string;
+}
 
 const Dashboard = () => {
-  const dispatch = useAppDispatch();
-  const [refresh, setRefresh] = useState({})
+  const params = useParams();
+  const [user, setUser] = useState();
+  const axiosPrivate = useAxiosPrivate();
+  const { auth, pharmacy, set_Pharmacy } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
 
+  console.log(params.id);
+  const getPharmacyById_url = `/pharmacy/${params.id}`;
 
-  // const users = useAppSelector(state => state.user.user);
-  useEffect(()=>{
+  useEffect(() => {
+    let isMounted = true;
+    // const controller = new AbortController();
 
-    const fetchData=async()=>{
+    const getSpecificUser = async () => {
       try {
-        const response = await axios.post('https://pharmanager-backend.onrender.com/auth/refresh-token')
-        
-        setRefresh(response.data)
-        return true
-      } catch (error:any) {
-        console.log(error.message);
-        
+        const response = await axiosPrivate.get(getPharmacyById_url, {
+          withCredentials: true,
+        });
+        console.log(response.data);
+        isMounted && set_Pharmacy(response.data.data.businessName);
+      } catch (error) {
+        console.error(error);
+        navigate("/login", { state: { from: location }, replace: true });
       }
-    }
-    fetchData()
-  },[])
-  const auth =useAppSelector(state=>state.auth.Auth)
-  
+    };
 
+    getSpecificUser();
 
+    return () => {
+      isMounted = false;
+      // controller.abort()1
+    };
+  }, []);
 
-  // console.log(auth);
-
-  // console.log(auth);
-  const onClick =async()=>{
-    dispatch(refreshToken())
-    console.log(auth);
-    
-  }
-    
-
-
-  
-  
+  console.log(pharmacy);
 
   return (
-  <>
-    <div>Dashboard</div>
-    <button onClick={onClick}>refresh</button>
-
-  </>
+    <>
+      <div>Dashboard</div>
+      <h1>{pharmacy}</h1>
+    </>
   );
 };
 

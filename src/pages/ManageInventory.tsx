@@ -33,6 +33,7 @@ const ManageInventory = () => {
       title: "Add new inventory",
       icon: <FaCirclePlus />,
       action:()=>Dispatch(showItem('add-inventory'))
+      // action:()=>Dispatch(inventory())
     
     },
     {

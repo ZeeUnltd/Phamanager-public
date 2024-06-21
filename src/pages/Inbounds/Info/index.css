@@ -1,0 +1,15 @@
+.application-container {
+    padding: 2em;
+
+}
+.application-container h3{
+    font-weight: 100;
+    margin: 40px 0;
+}
+
+.application {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 30px;
+    font-size: 15px;
+}

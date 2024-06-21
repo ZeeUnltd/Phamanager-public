@@ -14,7 +14,7 @@ const Sidebar = () => {
 
   return (
     <div className="p-[20px] h-[100%] border-r border-slate-200 font-Euclid text-text">
-      <div className="mb-8">
+      <div className="mb-8 h-[80px] w-[80px]">
         <img src={logo} alt="logo"></img>
       </div>
       <nav>

@@ -1,0 +1,79 @@
+.new-form {
+    padding-inline: 1.7rem 2.5rem;
+    padding-block: 1.5rem 2rem;
+    background-color: #FFF;
+    opacity: 1;
+}
+
+label{
+    font-family: Inter, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1rem;
+    color: rgba(17, 12, 74, 1);
+}
+
+input {
+    background-color: #D3D3D3;
+    padding: 1rem;
+    width: 222.5px;
+    border-radius: 5px 0px 0px 0px;
+    margin-block: 0.75rem;
+    font-family: Inter, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1rem;
+}
+
+input::placeholder {
+    font-family: Inter, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1rem;
+    color: rgba(177, 177, 180, 1);
+
+}
+
+.input-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+}
+
+.input-wrap > div {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-wrap > div >label {
+    width: 30%
+}
+
+.all-inputs-wrap {
+    display: flex;
+    flex-direction: row;
+    gap: 1.4rem;
+    align-items: center;
+}
+
+.unit {
+    margin-top: 3rem;
+}
+
+.button {
+    margin-top: 3rem;
+    margin-inline: 30%;
+    padding: 11px 53px;
+    background-color: rgba(0, 159, 227, 1);
+    color: #fff;
+    font-family: Inter, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 5px;
+    line-height: 1rem;
+
+}

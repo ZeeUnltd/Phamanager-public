@@ -1,10 +1,14 @@
 import axios from "axios";
 
-const baseURL ='https://pharmanager-backend.onrender.com'
+const baseURL ='https://pharmanager-backend.onrender.com/'
 // Create an Axios instance with baseURL and withCredentials options
 const Axios = axios.create({
     baseURL: baseURL,
+    headers: { "Content-Type": "application/json" },
+    withCredentials: true,
 });
+
+
 
 // // Request interceptor
 // Axios.interceptors.request.use(
@@ -44,9 +48,11 @@ const Axios = axios.create({
 //     }
 // );
  
-export const axiosPrivate = axios.create({
-    baseURL:baseURL,
-    headers:{'Content-Type':'application/json'}
-})
 
 export default Axios;
+
+export const axiosPrivate = axios.create({
+    baseURL:baseURL,
+    headers:{'Content-Type':'application/json'},
+    withCredentials: true,
+})

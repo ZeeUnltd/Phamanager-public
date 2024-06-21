@@ -1,0 +1,99 @@
+
+.header h2 {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+.header h2 span {
+    padding-right: 1em;
+}
+
+.inbound {
+    width: 97%;
+    height: 70vh;
+    margin-bottom: 10px;
+    border: 2px solid #54A4CC;
+    transform: scaleX(0.97);
+    transform-origin: right;
+    overflow-y: scroll;
+}
+.inbound::-webkit-scrollbar {
+    display: block;
+    width: .5rem;
+}
+
+.inbound::-webkit-scrollbar-thumb {
+    background-color: #c4c4c4;
+    border-radius: 100vh;
+}
+.inbound::-webkit-scrollbar-track {
+    display: none;
+}
+.inbound-top {
+    display: flex;
+    align-items: center;
+}
+.inbound-top .restuarant-img {
+    padding-top: 3em;
+    padding-left: 3em;
+    flex: 3;
+}
+
+.header-name {
+    margin: 1em 0;
+    font-size: 25px;
+}
+
+.inbound .page-image {
+    width: 100%;
+    height: auto; 
+    object-fit: contain;
+    margin: 0;
+    padding: 0;
+}
+  
+.invoice {
+    display: flex;
+    align-items: center;
+}
+
+.invoice .icon {
+    width: fit-content;
+    padding-right: 1em;
+}
+.invoice p {
+    font-size: 12px;
+}
+.header {
+    display: flex;
+    flex: 4;
+    justify-self: flex-start;
+    margin: 30px auto;
+    flex-direction: column;
+    height: 150px;
+    justify-content: space-between;
+    margin-top: 4em;
+}
+
+.inventories {
+    margin-top: 2.5em;
+    padding-left: 2em;
+}
+
+.searchbox {
+    flex: 5;
+    padding-bottom: 4em;
+    padding-right: 4em;
+    box-sizing: border-box;
+}
+
+.socials {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    transform: translateX(-9%);
+}
+
+.socials > img {
+    transform: scale(0.75);
+}

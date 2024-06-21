@@ -1,0 +1,59 @@
+.cards{
+    position: relative;
+    width: 376px;    
+    height: 190px;
+    background-color: #54A4CC;
+    padding: 1.5em;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+    .memory_icon{
+        position: absolute;
+        font-size: 25px;
+        color: #FFF;
+        right: 27px;
+        top: 14px;
+    }
+
+    &:nth-child(2){
+        background-color: #fff;
+        border: 2px solid #62909F;
+
+        .number, .head{
+            color: #110C4A;
+        }
+        .desc{
+            color: #049561;
+        }
+        .memory_icon{
+            color: #2817E9;
+        }
+
+    }
+    &:nth-child(3){
+        border: 2px solid #62909F;
+        background-color: #fff;
+
+        .number, .head{
+            color: #110C4A;
+        }
+        .desc{
+            color: #E00525;
+        }
+        .memory_icon{
+            color: #2817E9;
+        }
+    }
+
+    p{
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+
+        &.number{
+            font-size: 32px;
+            font-weight: 900;
+        }
+    }
+}

@@ -1,0 +1,18 @@
+.bordered {
+    width: 97%;
+    height: 100vh;
+    margin-bottom: 10px;
+    border: 2px solid #54A4CC;
+    transform: scaleX(0.97);
+    transform-origin: right;
+    overflow-y: scroll;
+}
+
+.unbordered {
+    width: 97%;
+    height: 100vh;
+    margin-bottom: 10px;
+    border: 1px solid #e0e1e2;
+    transform-origin: right;
+    overflow-y: scroll;
+}

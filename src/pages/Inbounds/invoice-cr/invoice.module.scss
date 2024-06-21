@@ -1,0 +1,9 @@
+.block {
+    margin-bottom: 2em;
+    padding: 1em;
+
+    &__top_component {
+        display: flex;
+        justify-content: flex-end;
+    }
+}

@@ -1,11 +1,15 @@
 import { FiShoppingCart } from "react-icons/fi";
 import { IoNotificationsOutline } from "react-icons/io5";
+import { useContext } from 'react';
+import AuthContext from "../../AuthProvider";
 
 type props = {
   title: string;
 };
 
 const Header = ({ title }: props) => {
+
+  const { pharmacy } = useContext(AuthContext);;
   return (
     <div className="w-full flex justify-between">
       <h2 className="font-bold font-Euclid text-[32px] text-text">{title}</h2>
@@ -23,7 +27,10 @@ const Header = ({ title }: props) => {
           </span>
         </div>
         <div className="flex justify-end mt-1">
-          <p className="text-text text-[12px]">User ID: 12345678</p>
+          <p className="text-text text-[12px]">
+          {/* User ID: 12345678 */}
+          {pharmacy? pharmacy : "Network error"}
+          </p>
         </div>
       </div>
     </div>
