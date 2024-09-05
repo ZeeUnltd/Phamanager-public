@@ -20,11 +20,11 @@ const WhyChooseUs = () => {
                 <img src={delivery} alt="" className="w-full" />
               </div>
               <h5 className="font-semibold text-2xl text-center">
-                FAST RUSH DELIVERY
+                FAST SERVICE APPROACH
               </h5>
               <p className="w-[80%] text-lg leading-loose text-center">
-                Our pharmacy partners deliver inbound requests within 24hrs to
-                prioritize your well-being.
+                Our healthcare partners deliver swift responses to prioritize
+                your well-being.
               </p>
             </div>
             <div className="w-[25%] flex flex-col items-center justify-start gap-4 border-r pr-2">
@@ -35,7 +35,7 @@ const WhyChooseUs = () => {
                 BETTER PRICING
               </h5>
               <p className="w-[80%] text-lg leading-loose text-center">
-                We allow you compare prices across various pharmacies within and
+                We allow you compare prices across various providers within and
                 outside your location to help with decision making.
               </p>
             </div>
@@ -47,8 +47,8 @@ const WhyChooseUs = () => {
                 INDUSTRY LEADING SATISFACTION GUARANTEE
               </h5>
               <p className="w-[80%] text-lg leading-loose text-center">
-                Our pharmacy parties follow the best practices from procurement
-                to handling and dispatch. Read more on our guarantees to you.
+                Our providers and patients are onboarded on a system that helps
+                them get the best health stakeholder benefits.
               </p>
             </div>
             <div className="w-[25%] flex flex-col items-center justify-start gap-4">
@@ -60,7 +60,7 @@ const WhyChooseUs = () => {
               </h5>
               <p className="w-[80%] text-lg leading-loose text-center">
                 We allow pre-sales and post sales advisory and feedback to
-                improve value offerings to both pharmacies and drug buyers.
+                improve value offerings to both providers and patients.
               </p>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import { Link} from "react-router-dom";
 import useImageZoom from "./hook/useImageZoom,";
-import Header from "./components/Header";
+import PresHeader from "./components/presHeader";
 import { useParams } from "react-router-dom";
 
 function PrescriptionDetails() {
@@ -13,7 +13,7 @@ function PrescriptionDetails() {
 
     return (
     <>
-    <Header title={'Prescriptions'} subtitle={'view prescriptions'} linkTo={'/inbounds/checkout'} />
+    <PresHeader title={'Prescriptions'} subtitle={'view prescriptions'} linkTo={'/inbounds/checkout'} presCart={[]}/>
     <section className="w-full border-2 border-[#009fe3]  py-6 px-12">
       <div className="flex">
         <div className="w-[60%] mt-20">

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import CustomTable from "../../../components/Tables/Table";
 import ManagerButton from "./components/ManagerButton";
-import PresHeader from "./components/Header";
+import PresHeader from "./components/presHeader";
 
 
 
@@ -21,7 +21,7 @@ function Prescription() {
 
   return (
     <>
-      <PresHeader title={"Prescription"} linkTo={"/inbounds/checkout/"} />
+      <PresHeader title={"Prescription"} linkTo={"/inbounds/checkout/"} presCart={[]} />
 
       <section className="pr-14">
         {/* top button */}

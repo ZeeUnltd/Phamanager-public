@@ -25,6 +25,7 @@ import "./index.css";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../../../components/redux/Cart/cartSlice";
+import { toggleActive } from "../../../../components/redux/Cart/activeSlice";
 
 const myArray = [
   {
@@ -174,7 +175,7 @@ const CreateInvoice: React.FC = () => {
   const dispatch = useDispatch();
   const param = useParams();
   const uniqueID = param.id;
-  const cart = useSelector((state: any) => state.cart.cart);
+  const activee = useSelector((state: any) => state.active.active);
   // const setActivee = () => {
   //   let activee;
   //   // Check if cart exists and is an array before using forEach
@@ -411,7 +412,6 @@ const CreateInvoice: React.FC = () => {
                           brandName={val.brand}
                           tabletSize="500mg"
                           price={val.price}
-                          
                         />
                       ))}
                     </div>

@@ -1,38 +1,39 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import CounterPrice from "../../../../components/CounterPrice";
-import Dispensary from "../../../../components/Dispensary";
+import CounterPrice from "../../components/CounterPrice";
+import Dispensary from "../../components/Dispensary";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import Container from "../../../../components/container/container";
-import Header from "../components/Header";
+import Container from "../../components/container/container";
+import Header from "../Header";
 import { useParams } from "react-router-dom";
 import {
   incrementQuantity,
   decrementQuantity,
   removeItem,
-} from "../../../../components/redux/Cart/cartSlice";
-import { resetActive } from "../../../../components/redux/Cart/activeSlice";
+} from "../redux/Cart/userCartSlice";
+import { resetActive } from "../../components/redux/Cart/activeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 interface cartProps {
   cart: Array<any>;
   id: any;
+  onClick: any;
 }
 
-const Cart: React.FC<cartProps> = ({ id }) => {
+const CartComp: React.FC<cartProps> = ({ id, onClick }) => {
   const param = useParams();
   const uniqueID = param.id;
 
   const dispatch = useDispatch();
-  const cart = useSelector((state: any) => state.cart.cart);
+  const cartt = useSelector((state: any) => state.userCart.userCart);
 
   const getTotal = () => {
     let totalQuantity = 0;
     let totalPrice = 0;
     // Check if cart exists and is an array before using forEach
-    if (cart && Array.isArray(cart)) {
-      cart.forEach((item) => {
+    if (cartt && Array.isArray(cartt)) {
+      cartt.forEach((item) => {
         totalQuantity += item.quantity;
         totalPrice += item.price * item.quantity;
         if (item.quantity === 0) {
@@ -51,7 +52,7 @@ const Cart: React.FC<cartProps> = ({ id }) => {
 
   useEffect(() => {
     getTotal();
-  }, [cart])
+  }, [cartt])
 
   return (
     <>
@@ -64,14 +65,16 @@ const Cart: React.FC<cartProps> = ({ id }) => {
 
       <Container type="blue-border">
         <div className="checkout-page">
-          {(Array.isArray(cart) && cart.length > 0) && getTotal().totalQuantity !== 0 ? (
-            cart.map((item) => (
+          {(Array.isArray(cartt) && cartt.length > 0) ? (
+            cartt.map((item) => (
               <div className="top" key={item.id}>
                 <Dispensary
                   drugName={item.drugName || "Unknown"}
-                  image={item.image}
-                  brandName={item.brandName}
-                  tabletSize={item.tabletSize}
+                  image={
+                    "/svg/drugPic.svg"
+                  }
+                  brandName={item.pharmacy}
+                  tabletSize={item.details}
                 />
                 <CounterPrice
                   increaseCounter={() => dispatch(incrementQuantity(item.id))}
@@ -104,15 +107,16 @@ const Cart: React.FC<cartProps> = ({ id }) => {
               <span>Item total</span>
               <span>{getTotal().totalPrice || "₦ 0"}</span>
             </div>
-            <div className="c-button">
-              <Link
+            <div className="c-button w-[100%]" onClick={onClick}>
+              {/* <Link
                 style={{
                   width: "100%",
                 }}
                 to={`/dashboard/${uniqueID}/inbounds/prescription/cart-checkout`}
               >
                 Checkout
-              </Link>
+              </Link> */}
+              Checkout
             </div>
           </div>
         </div>
@@ -121,4 +125,4 @@ const Cart: React.FC<cartProps> = ({ id }) => {
   );
 };
 
-export default Cart;
+export default CartComp;

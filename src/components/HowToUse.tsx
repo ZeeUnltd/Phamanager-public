@@ -13,7 +13,7 @@ const HowToUse = () => {
           <img src={iphoneimage} alt="iphone image" className="w-full" />
         </div>
         <div className="w-[60%] pl-28">
-          <h3 className="font-bold text-3xl">For drug buyers</h3>
+          <h3 className="font-bold text-3xl">For patients</h3>
 
           <div className="flex flex-col justify-between">
             <div className="mt-12">
@@ -33,12 +33,13 @@ const HowToUse = () => {
                 <h3 className="text-3xl text-primary font-bold ">2</h3>
                 <div className="flex flex-col gap-6">
                   <h5 className="font-semibold text-2xl">
-                    Input medication search{" "}
+                    Input supplies or service search
                   </h5>
                   <p className="w-[80%] text-xl leading-loose">
                     {" "}
-                    Input the details of the type of medication or supplies that
-                    you are looking to filter amount, composition, location etc.
+                    Input the details of the type of supplies or servise that
+                    you are looking to get. Filter by provider, amount,
+                    composition, location etc.
                   </p>
                 </div>
               </div>
@@ -48,10 +49,10 @@ const HowToUse = () => {
                 <h3 className="text-3xl text-primary font-bold ">3</h3>
                 <div className="flex flex-col gap-6">
                   <h5 className="font-semibold text-2xl">
-                    Connect with pharmacy
+                    Connect with provider
                   </h5>
                   <p className="w-[80%] text-xl leading-loose">
-                    Send a medication request to get advisory to assess
+                    Send a purchase request to get advisory to assess
                     desirability or purchase.
                   </p>
                 </div>
@@ -81,7 +82,7 @@ const HowToUse = () => {
           />
         </div>
         <div className="w-[45%] mt-12">
-          <h3 className="font-bold text-3xl">For pharmacies</h3>
+          <h3 className="font-bold text-3xl">For providers</h3>
 
           <div className="flex flex-col justify-between gap-12 mt-12">
             <div className="flex items-start gap-12">
@@ -99,11 +100,13 @@ const HowToUse = () => {
               <h3 className="text-3xl text-primary font-bold ">2</h3>
               <div className="flex flex-col gap-6">
                 <h5 className="font-semibold text-2xl">
-                  Search dispensary leads and add inbounds
+                  Manage internal operations
                 </h5>
                 <p className="w-[80%] text-xl leading-loose">
-                  You can create an online dispensary counter via your custom
-                  webpage, get and manage leads on your dashboard.
+                  We guarantee providers a seamless internal operation system
+                  for patient actions, supply and back office management.
+                  {/* You can create an online dispensary counter via your custom
+                  webpage, get and manage leads on your dashboard. */}
                 </p>
               </div>
             </div>
@@ -112,12 +115,11 @@ const HowToUse = () => {
               <h3 className="text-3xl text-primary font-bold ">3</h3>
               <div className="flex flex-col gap-6">
                 <h5 className="font-semibold text-2xl">
-                  Manage and automate pharmacy operations
+                  Manage external relationship{" "}
                 </h5>
                 <p className="w-[80%] text-xl leading-loose">
-                  Manage pharmacies, procurement, vendors, payments, customer
-                  feedback, and all other integrations for your pharmacy,
-                  powered by our end-to-end pharmacy operations manager.
+                  Share data and partner with other providers to collaborate
+                  towards delivering population-based healthcare outcomes.
                 </p>
               </div>
             </div>

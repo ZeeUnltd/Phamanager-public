@@ -28,27 +28,27 @@ const Hero = () => {
 
   return (
     <div>
-      <section className="flex pl-48 py-6 ">
+      <section className="flex pl-44 py-6 ">
         <div className=" pt-10">
-          <h1 className="font-bold text-6xl mb-6 text-text">
-            Simplify Your Pharma Experience
+          <h1 className="font-bold text-5xl mb-6 text-text">
+            Simplify Your HealthCare Experience
           </h1>
           <p className="text-lg text-text">
-            Stay ahead of the curve with our comprehensive pharmacy software.
+            Stay ahead of the curve with our comprehensive health system solutions.
           </p>
           <form
             action=""
             className="w-full flex items-center relative mt-12 text-sm bg-gray-100 bg-opacity-90"
             onSubmit={searchResultsHandler}
           >
-            <div className="w-[53%] flex items-center  pl-2 bg-gray-100 bg-opacity-90 border border-formBlue rounded-s-md">
+            <div className="w-[53%] flex items-center justify-center gap-1  pl-2 bg-gray-100 bg-opacity-90 border border-formBlue rounded-s-md">
               <CiSearch className="text-slate-500" size={25} />
               <input
-                className="w-[95%] bg-inherit py-4 focus:outline-none rounded-l-md text-text"
+                className="w-[95%] bg-inherit text-xs py-4 focus:outline-none rounded-l-md"
                 type="text"
                 name="medication"
                 id=""
-                placeholder="What medication are you looking to buy?"
+                placeholder="What are you looking for?"
                 required
               />
             </div>
@@ -83,7 +83,7 @@ const Hero = () => {
           >
             <label
               htmlFor="prescription"
-              className="flex w-full h-full justify-center gap-3 p-4"
+              className="flex w-full h-full justify-center items-center gap-3 p-4"
             >
               <TbCloudUpload size={25} />
               Click here to upload prescription list
@@ -96,18 +96,18 @@ const Hero = () => {
             </label>
           </form>
           <div className="flex items-center my-12 text-sm text-text">
-            <div className="border-r-2 border-formBlue pr-10">
-              <h5 className="font-semibold mb-2">Safe Delivery</h5>
-              <p className="">As soon as man mar 20</p>
+            <div className="border-r-2 border-formBlue pr-5 text-center">
+              <h5 className="font-semibold mb-2">Data Interoperability</h5>
+              <p className="">Data sharing among healthcare stakeholders</p>
             </div>
-            <div className="border-r-2 border-formBlue pr-10 pl-10">
+            <div className="border-r-2 border-formBlue pr-5 pl-5 text-center">
               <h5 className="font-semibold mb-2">Multiple Choices</h5>
-              <p className="">Compare various prices</p>
+              <p className="">Wide Selection of partners in the industry</p>
             </div>
-            <div className="pl-10">
-              <h5 className="font-semibold mb-2">Need online advisory</h5>
+            <div className="pl-5 text-center">
+              <h5 className="font-semibold mb-2">Digital Access System</h5>
               <p className="">
-                We allow you to speak the pharmacist from anywhere
+                We allow you to access providers from anywhere
               </p>
             </div>
           </div>

@@ -2,6 +2,7 @@ import { TbGridDots } from "react-icons/tb";
 import { BsDot } from "react-icons/bs";
 import avatar from "../assets/images/avatar.svg";
 import logo from "../assets/images/logo.svg";
+import { useNavigate } from "react-router-dom";
 import navCallIcon from "../assets/images/navcallimage.png";
 import navChatIcon from "../assets/images/navchatimage.png";
 import { navLinks } from "../constants";
@@ -17,17 +18,22 @@ import { useState } from "react";
 
 const MainNavigation = () => {
   const [toogleToolBox, setToogleToolBox] = useState(false);
+  const navigate = useNavigate();
   return (
     <div>
       <div className="bg-[#E6F2FB] flex items-center justify-between px-8 py-3 text-text">
         <p className="text-sm">We Guarantee 99.7% Satisfaction</p>
-        <div className="flex items-center justify-between w-[160px] relative">
+        <div className="flex items-center justify-between w-[250px] relative">
           <div
             className="flex gap-1 items-center cursor-pointer hover:text-formBlue"
             onClick={() => setToogleToolBox(!toogleToolBox)}
           >
             <TbGridDots size={20} />
             <p className="text-base hover:text-formBlue">Tools</p>
+          </div>
+          <div className="flex gap-2 items-center px-10 py-2 border-3 rounded-full cursor-pointer" onClick={() => navigate("/cart-to-KYC")}>
+            <img src={"/svg/emptyCart.svg"} alt="" />
+            <p>Cart</p>
           </div>
           <div className="w-10 h-10 rounded-full">
             <img src={avatar} alt="profile-avatar" className="w-full h-full " />

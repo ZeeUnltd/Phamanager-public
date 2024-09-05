@@ -66,7 +66,9 @@ function SignUp() {
     email: Yup.string()
       .email("Invalid email address")
       .required("Email is required"),
-    password: Yup.string().required("Password is Required").min(8, "Password must be at least 8 characters"),
+    password: Yup.string()
+      .required("Password is Required")
+      .min(8, "Password must be at least 8 characters"),
     type: Yup.string().required("Type is required"),
     address: Yup.string().required("A user must have an address"),
   });
@@ -79,26 +81,21 @@ function SignUp() {
     try {
       const response = await Axios.post(register_url, data);
       console.log(response.data, response.statusText);
-      navigate("/login", {replace: true});
+      navigate("/login", { replace: true });
 
       //clear the input fields if successful here
     } catch (error) {
       if (!error?.response) {
         console.log("No server response");
-      }
-      
-      else if (error.response.status === 409) {
+      } else if (error.response.status === 409) {
         console.log("username has been taken");
-      }
-
-      else {
+      } else {
         console.log("Registration error: ", error);
       }
 
       console.log("Registration error: ", error);
     }
   };
-
 
   const onSubmit = async (data: any) => {
     console.log(data);
@@ -165,16 +162,18 @@ function SignUp() {
         <img src={signupImage} alt="" className="h-[900px]" />
       </div>
       <div className="w-[50%] bg-white rounded-r-[50px] flex flex-col gap-10 p-12 items-start pl-[10%] h-[900px]">
-        <h3 className="font-semibold text-2xl">Welcome to Pharmanager</h3>
+        <h3 className="font-semibold text-2xl">
+          Welcome to Pharmanager Health Systems
+        </h3>
 
-        <div className="flex justify-between border-2 border-formBlue rounded-md w-[550px]">
+        <div className="flex justify-between border-2 border-formBlue rounded-md w-[100%]">
           <div
             className={`p-3 w-[50%] text-center cursor-pointer ${
               buyer && "bg-formBlue text-white"
             }`}
             onClick={() => setSignupAs("drug buyer")}
           >
-            Sign up as a drug buyer
+            Sign up as a patient
           </div>
           <div
             className={`p-3 w-[50%] text-center cursor-pointer ${
@@ -182,7 +181,7 @@ function SignUp() {
             }`}
             onClick={() => setSignupAs("pharmacy")}
           >
-            Sign up as a pharmacy
+            Sign up as a provider
           </div>
         </div>
 
@@ -192,7 +191,7 @@ function SignUp() {
             validationSchema={buyerValidationSchema}
             onSubmit={onSubmit}
           >
-            <Form className="w-[550px] flex flex-col gap-8">
+            <Form className="w-[100%] flex flex-col gap-8">
               <>
                 <div className="flex justify-between items-center gap-6 ">
                   <CustomInput
@@ -250,7 +249,7 @@ function SignUp() {
             validationSchema={PharmacyValidationSchema}
             onSubmit={onSubmit_alt}
           >
-            <Form className="w-[550px] flex flex-col gap-8">
+            <Form className="w-[100%] flex flex-col gap-8">
               <>
                 <CustomInput
                   type="text"
@@ -258,24 +257,33 @@ function SignUp() {
                   name="businessName"
                   label=""
                 />
+
+                <CustomInput
+                  type="number"
+                  placeholder="Business License ID"
+                  name="businessName"
+                  label=""
+                />
+
                 <CustomInput
                   label=""
                   type="email"
                   placeholder="Email Address"
                   name="email"
                 />
-                <div className=" flex gap-4">
-                  <CustomInput
-                    placeholder="Password"
-                    name="password"
-                    label=""
-                    type={showPassword ? "text" : "password"}
-                    handleShowPassword={() => setShowPassword(!showPassword)}
-                  />
-                  <CustomInput name="address" label="" placeholder="Address" />
-                </div>
+
+                <CustomInput
+                  placeholder="Password"
+                  name="password"
+                  label=""
+                  type={showPassword ? "text" : "password"}
+                  handleShowPassword={() => setShowPassword(!showPassword)}
+                />
+                <CustomInput name="address" label="" placeholder="Address" />
+
                 <CustomSelect
                   label=""
+                  placeholder="Select provider type"
                   name="type"
                   options={[
                     {

@@ -76,7 +76,7 @@ const CustomInput: FC<InputProps> = ({ label, handleOnChange, handleOnBlur, plac
                             {({ field }: any) => (
                                 <input
                                     type={type}
-                                    className='input border-2 focus:outline-formBlue rounded-md p-4 w-full  border-slate-200'
+                                    className='input border-2 background: bg-transparent focus:outline-formBlue rounded-md p-4 w-full  border-slate-200'
                                     value={field.value}
                                     placeholder={placeholder}
                                     onChange={(e) => {

@@ -1,10 +1,11 @@
 export const navLinks = [
   { id: "home", title: "Home", to: "/" },
-  { id: "buyer", title: "For drug buyers", to: "buyer" },
-  { id: "pharmacies", title: "For pharmacies", to: "pharmacies" },
-  { id: "help", title: "Help", to: "help" },
-  { id: "FAQs", title: "FAQs", to: "FAQs" },
-  { id: "about", title: "About", to: "about" },
+  { id: "buyer", title: "For patients", to: "buyer" },
+  { id: "pharmacies", title: "For providers", to: "pharmacies" },
+  { id: "p&s", title: "Products and Services", to: "about" },
+  // { id: "help", title: "Help", to: "help" },
+  // { id: "FAQs", title: "FAQs", to: "FAQs" },
+  { id: "about", title: "Resources", to: "about" },
 ];
 
 export const tools = [

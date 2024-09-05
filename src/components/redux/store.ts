@@ -4,7 +4,9 @@ import utils, { UtilSlice } from './utils';
 import { authSlice } from './Auth';
 import { InventorySlice } from './inventory';
 import { cartReducer } from './Cart/cartSlice';
+import { activeReducer } from './Cart/activeSlice';
 import { presCartReducer } from "./Cart/presCartSlice";
+import {userCartReducer} from "./Cart/userCartSlice"
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +16,8 @@ export const store = configureStore({
     inventory: InventorySlice.reducer,
     cart: cartReducer,
     presCart: presCartReducer,
+    active: activeReducer,
+    userCart: userCartReducer,
   },
 });
 

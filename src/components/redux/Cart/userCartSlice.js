@@ -1,14 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
-const cartSlice = createSlice({
-  name: "cart",
+const userCartSlice = createSlice({
+  name: "userCart",
   initialState: {
-    cart: [],
+    userCart: [],
   },
   reducers: {
     addToCart: (state, action) => {
-      const itemInCart = state.cart.find(
+      const itemInCart = state.userCart.find(
         (item) => item.id === action.payload.id
       );
       
@@ -24,21 +23,16 @@ const cartSlice = createSlice({
           console.log(itemInCart.active)
         }
       } else {
-        state.cart.push({ ...action.payload, quantity: 1, active: true });
+        state.userCart.push({ ...action.payload, quantity: 1, active: true });
       }
     },
-    activeState: (state, action) => {
-      const modeInCart = state.active.valueOf(
-        (item) => item.id === action.payload.id
-      );
-      modeInCart = !modeInCart;
-    },
+
     incrementQuantity: (state, action) => {
-      const item = state.cart.find((item) => item.id === action.payload);
+      const item = state.userCart.find((item) => item.id === action.payload);
       item.quantity++;
     },
     decrementQuantity: (state, action) => {
-      const item = state.cart.find((item) => item.id === action.payload);
+      const item = state.userCart.find((item) => item.id === action.payload);
       if (item.quantity === 1) {
         item.quantity = 1;
       } else {
@@ -46,19 +40,14 @@ const cartSlice = createSlice({
       }
     },
     removeItem: (state, action) => {
-      const removeItem = state.cart.filter(
+      const removeItem = state.userCart.filter(
         (item) => item.id !== action.payload
       );
-      state.cart = removeItem;
+      state.userCart = removeItem;
     },
   },
 });
 
-export const cartReducer = cartSlice.reducer;
-export const {
-  addToCart,
-  activeState,
-  incrementQuantity,
-  decrementQuantity,
-  removeItem,
-} = cartSlice.actions;
+export const userCartReducer = userCartSlice.reducer;
+export const { addToCart, incrementQuantity, decrementQuantity, removeItem } =
+  userCartSlice.actions;

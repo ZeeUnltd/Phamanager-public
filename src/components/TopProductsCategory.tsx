@@ -72,7 +72,7 @@ const TopProductsCategory = () => {
           <img
             className="w-full h-full"
             src={image6}
-            alt="Telehealth services"
+            alt="Provider-Patient Matching"
           />
         </div>
       </div>

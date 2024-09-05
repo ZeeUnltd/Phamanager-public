@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BsFilter } from "react-icons/bs";
-import PresHeader from "./components/Header";
+import PresHeader from "./components/presHeader";
 import { testData } from "./utils/TestData";
 import PrescriptionsTable from "./components/PrescriptionsTable";
 
@@ -24,7 +24,7 @@ const PrescriptionsManager = () => {
   return (
     <>
       {/* Header */}
-      <PresHeader title={"Prescriptions Manager"} linkTo={"/inbounds/checkout"}/>
+      <PresHeader title={"Prescriptions Manager"} linkTo={"/inbounds/checkout"} presCart={[]}/>
 
       {/* Main */}
       <section className="relative">

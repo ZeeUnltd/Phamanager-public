@@ -26,12 +26,15 @@ const Footer = () => {
       <div className="grid grid-cols-5 gap-6 ">
         <div className="flex flex-col gap-6 text-slate-500 uppercase">
           <h4 className="font-semibold text-black ">PRODUCTS</h4>
-          <p className="hover:text-black cursor-pointer text-sm">Marketplace</p>
+          <p className="hover:text-black cursor-pointer text-sm">Consumer marketplace</p>
           <p className="hover:text-black cursor-pointer text-sm">
             pharmacy management system
           </p>
           <p className="hover:text-black cursor-pointer text-sm">
             hospital management system
+          </p>
+          <p className="hover:text-black cursor-pointer text-sm">
+            Payers management system
           </p>
           <p className="hover:text-black cursor-pointer text-sm">
             laboratory management system
@@ -44,7 +47,7 @@ const Footer = () => {
         <div className="flex flex-col gap-6 text-slate-500  uppercase">
           <h4 className="font-semibold text-black ">services</h4>
           <p className="hover:text-black cursor-pointer text-sm">
-            product sales
+            medical supplies distribution
           </p>
           <p className="hover:text-black cursor-pointer text-sm">
             medical help
@@ -56,11 +59,11 @@ const Footer = () => {
             outreach services
           </p>
           <p className="hover:text-black cursor-pointer text-sm">
-            Public health
+            Public health and partnerships
           </p>
-          <p className="hover:text-black cursor-pointer text-sm">
+          {/* <p className="hover:text-black cursor-pointer text-sm">
             all services
-          </p>
+          </p> */}
         </div>
         <div className="flex flex-col gap-6 text-slate-500  uppercase">
           <h4 className="font-semibold text-black ">help</h4>

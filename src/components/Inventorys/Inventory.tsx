@@ -9,6 +9,7 @@ import "./index.css";
 // import { useDispatch } from "react-redux";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import { addToCart } from "../redux/Cart/cartSlice";
+import { toggleActive } from "../redux/Cart/activeSlice";
 
 // import Image from '../Image'
 // import rightArrow from '../../assets/svg/right-arrow.svg'
@@ -24,6 +25,7 @@ interface props {
   tabletSize: string;
   active: boolean;
   className: string;
+  setActivee: any;
   //   onClick: Function;
 }
 
@@ -38,22 +40,10 @@ const Inventory: React.FC<props> = ({
   edit,
   className,
 }) => {
-  //   const dispatch = useDispatch();
   const dispatch = useAppDispatch();
-  const [active, setActive] = useState(false);
-  // const cart = useAppSelector((state: any) => state.cart.cart);
-  // const setActive = () => {
-  //   let active;
-  //   // Check if cart exists and is an array before using forEach
-  //   if (cart && Array.isArray(cart)) {
 
-  //     cart.forEach((item: any, index) => {
-  //       activee = item.active;
-  //     })
-  //   }
+  const activee = useAppSelector((state: any) => state.active.active)
 
-  //   return {active};
-  // }
 
   return (
     <div
@@ -70,19 +60,22 @@ const Inventory: React.FC<props> = ({
             edit,
           })
         );
-        setActive(!active);
+
+        dispatch(
+          toggleActive(id)
+        )
       }}
     >
       <div className="image-cards">
         <img alt="img" src={image} height="50%" width="100%" />
       </div>
       <div
-        className={active ? "info-wraps-active" : "info-wraps"}
+        className={activee[id] ? "info-wraps-active" : "info-wraps"}
         // className="info-wrap"
       >
         <span className="drug-type">{drugType}</span>
         <div className="card-details">
-          <div className={!active ? "locations" : "locations-active"}>
+          <div className={!activee[id] ? "locations" : "locations-active"}>
             <p>{drugName}</p>
             {/* <img alt="alt" src={location} height="20px" width="20px" /> */}
             <p>{brandName}</p>
@@ -100,10 +93,10 @@ const Inventory: React.FC<props> = ({
         </div>
         <div className="card-base">
           {/* <img alt="alt" src={weight} height="20px" width="20px" /> */}
-          <p className={!active ? "tablet-size" : "tablet-size-active"}>
+          <p className={!activee[id] ? "tablet-size" : "tablet-size-active"}>
             {tabletSize}
           </p>
-          <p className={!active ? "cardbase-price" : "cardbase-price-active"}>
+          <p className={!activee[id] ? "cardbase-price" : "cardbase-price-active"}>
             {"₦ " + price}
           </p>
         </div>
